@@ -1,0 +1,35 @@
+{
+  "forslagTilBehandlingsplan": {
+    "tilUtvalgId": "1",
+    "tilUtvalgNavn": "Plan og byggesak"
+  },
+  "sak": {
+    "referanseEksternNøkkel": {
+      "fagsystem": "ePlansak",
+      "nøkkel": "AB123456789"
+    },
+    "fagsystemetsSaksnummer": {
+      "saksår": 2021,
+      "sakssekvensnummer": 1
+    },
+    "tittel": "Orientering om ny forskrift ....",
+    "hoveddokument": {
+      "tittel": "Orientering om ny forskrift ....",
+      "skjermetDokument": false,
+      "dokumenttype": {
+        "kodeverdi": "BREV"
+      },
+      "referanseDokumentfil": "orientering.docx"
+    },
+    "saksbeskrivelse": {
+      "tekstInnhold": "beskrivelse av saken",
+      "tekstFormat": {
+        "kodeverdi": "tekst"
+      }
+    },
+    "saksansvarlig": "saksb"
+   
+  }
+}
+
+

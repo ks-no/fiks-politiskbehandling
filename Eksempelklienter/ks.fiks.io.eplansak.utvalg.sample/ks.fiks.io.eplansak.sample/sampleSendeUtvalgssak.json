@@ -1,0 +1,66 @@
+{
+  "forslagTilBehandlingsplan": {
+    "tilUtvalgId": "1",
+    "tilUtvalgNavn": "Plan og byggesak"
+  },
+  "sak": {
+    "referanseEksternNøkkel": {
+      "fagsystem": "ePlansak",
+      "nøkkel": "AB123456789"
+    },
+    "fagsystemetsSaksnummer": {
+      "saksår": 2021,
+      "sakssekvensnummer": 1
+    },
+    "tittel": "OMRÅDEREGULERING FOR HIS Allè - BEHANDLING FØR HØRING OG UTLEGGING TIL OFFENTLIG ETTERSYN",
+    "hoveddokument": {
+      "tittel": "OMRÅDEREGULERING FOR HIS Allè - BEHANDLING FØR HØRING OG UTLEGGING TIL OFFENTLIG ETTERSYN",
+      "skjermetDokument": false,
+      "dokumenttype": {
+        "kodeverdi": "SAKSFRAMLEGG"
+      },
+      "referanseDokumentfil": "saksframlegg.docx"
+    },
+    "saksbeskrivelse": {
+      "tekstInnhold": "beskrivelse av saken",
+      "tekstFormat": {
+        "kodeverdi": "tekst"
+      }
+    },
+    "forslagTilVedtak": {
+      "tekstInnhold": "... vedtar å legge forslag til detaljreguleringsplan for Nepåkeren med planid 2019005 ut til høring og offentlig ettersyn. Planforslaget er vist på kart i målestokk 1:2000 i A1, merket Bodø kommune datert 13.12.2019 og i bestemmelser sist endret 16.12.2019, og planbeskrivelse datert 11.12.2019. * Vedtaket fattes i henhold til plan- og bygningslovens § 12-11, jf. 12-10. ",
+      "tekstFormat": {
+        "kodeverdi": "markup"
+      }
+    },
+    "saksansvarlig": "saksb",
+    "vedlegg": [
+      {
+        "tittel": "191216 Planbestemmelser for Nepåkeren",
+        "skjermetDokument": false,
+        "dokumenttype": {
+          "kodeverdi": "PLANBEST"
+        },
+        "referanseDokumentfil": "planbestemmelser.pdf"
+      },
+      {
+        "tittel": "20191213 Plankart Nepåkeren A1",
+        "skjermetDokument": false,
+        "dokumenttype": {
+          "kodeverdi": "PLANKART"
+        },
+        "referanseDokumentfil": "plankart.pdf"
+      },
+      {
+        "tittel": "Vedlegg 5 ROS-analyse",
+        "skjermetDokument": false,
+        "dokumenttype": {
+          "kodeverdi": "ROS-ANALYSE"
+        },
+        "referanseDokumentfil": "analyse.pdf"
+      }
+    ]
+  }
+}
+
+

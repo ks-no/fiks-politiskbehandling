@@ -1,0 +1,32 @@
+{
+  "plannavn": "Breisås Syd",
+  "plantype": {
+    "kodeverdi": "35",
+    "kodebeskrivelse": "Detaljregulering"
+  },
+  "planbestemmelse": {
+    "kodeverdi": "2",
+    "kodebeskrivelse": "Uten bestemmelser"
+  },
+  "lovreferanse": {
+    "kodeverdi": "6",
+    "kodebeskrivelse": "PBL 2008"
+  },
+  "saksnummer": {
+    "saksaar": "2019",
+    "sakssekvensnummer": "1234465"
+  },
+  "vedlegg": [
+    {
+      "dokumenttype": "PLANKART",
+      "filnavn": "06_36_2012_plankart.pdf"
+    },
+    {
+      "dokumenttype": "GEOREFPLAN",
+      "filnavn": "omriss.gml"
+    }
+  ]
+}
+
+
+

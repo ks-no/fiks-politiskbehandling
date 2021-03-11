@@ -1,0 +1,205 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://no.fiks.ks.utvalg/SendeOrienteringssak.v1.schema.json",
+  "title": "SendeOrienteringssak",
+  "definitions": {
+    "Vedlegg": {
+      "type": "object",
+      "properties": {
+        "tittel": {
+          "type": "string"
+        },
+        "skjermetDokument": {
+          "type": "boolean"
+        },
+        "dokumenttype": {
+          "type": "object",
+          "properties": {
+            "kodeverdi": {
+              "type": "string"
+            },
+            "kodebeskrivelse": {
+              "type": "string"
+            }
+          }
+        },
+        "referanseDokumentfil": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tittel",
+        "skjermetDokument",
+        "referanseDokumentfil"
+      ]
+    },
+    "Møte": {
+      "type": "object",
+      "properties": {
+        "møteid": {
+          "type": "string"
+        },
+        "møtedato": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "møteid"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "forslagTilBehandlingsplan": {
+      "type": "object",
+      "properties": {
+        "tilUtvalgId": {
+          "type": "string"
+        },
+        "tilUtvalgNavn": {
+          "type": "string"
+        },
+        "tilMøteId": {
+          "type": "string"
+        },
+        "tilMøtedato": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "tilUtvalgId",
+        "tilUtvalgNavn"
+      ]
+    },
+    "sak": {
+      "type": "object",
+      "properties": {
+        "referanseEksternNøkkel": {
+          "type": "object",
+          "properties": {
+            "fagsystem": {
+              "type": "string"
+            },
+            "nøkkel": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "fagsystem",
+            "nøkkel"
+          ]
+        },
+        "fagsystemetsSaksnummer": {
+          "type": "object",
+          "properties": {
+            "saksår": {
+              "type": "integer"
+            },
+            "sakssekvensnummer": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "saksår",
+            "sakssekvensnummer"
+          ]
+        },
+        "tittel": {
+          "type": "string"
+        },
+        "hoveddokument": {
+          "type": "object",
+          "properties": {
+            "tittel": {
+              "type": "string"
+            },
+            "skjermetDokument": {
+              "type": "boolean"
+            },
+            "dokumenttype": {
+              "type": "object",
+              "properties": {
+                "kodeverdi": {
+                  "type": "string"
+                },
+                "kodebeskrivelse": {
+                  "type": "string"
+                }
+              }
+            },
+            "referanseDokumentfil": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "tittel",
+            "skjermetDokument",
+            "referanseDokumentfil"
+          ]
+        },
+        "saksbeskrivelse": {
+          "type": "object",
+          "properties": {
+            "tekstInnhold": {
+              "type": "string"
+            },
+            "tekstFormat": {
+              "type": "object",
+              "properties": {
+                "kodeverdi": {
+                  "type": "string"
+                },
+                "kodebeskrivelse": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "skjerming": {
+          "type": "object",
+          "properties": {
+            "skjermingshjemmel": {
+              "type": "string"
+            },
+            "skjermingsvarighet": {
+              "type": "integer"
+            },
+            "skjermingOpphoererDato": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          "required": [
+            "skjermingshjemmel"
+          ]
+        },
+        "saksansvarlig": {
+          "type": "string"
+        },
+        "posisjon": {
+          "description": "Punkt",
+          "type": "object"
+        },
+        "vedlegg": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Vedlegg"
+          }
+        }
+      },
+      "required": [
+        "referanseEksternNøkkel",
+        "fagsystemetsSaksnummer",
+        "tittel",
+        "saksansvarlig"
+      ]
+    }
+  },
+  "required": [
+    "forslagTilBehandlingsplan",
+    "sak"
+  ]
+}

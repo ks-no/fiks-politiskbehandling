@@ -1,0 +1,73 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Remove="appsettings.development.json" />
+    <None Remove="appsettings.json" />
+    <None Remove="files\analyse.pdf" />
+    <None Remove="files\Breisås Sør_Planbeskrivelse.pdf" />
+    <None Remove="files\planbestemmelser.pdf" />
+    <None Remove="files\plankart.pdf" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Include="files\planbestemmelser.pdf" />
+    <Content Include="files\plankart.pdf" />
+    <Content Include="files\Breisås Sør_Planbeskrivelse.pdf" />
+    <Content Include="files\analyse.pdf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="appsettings.development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="KS.Fiks.IO.Client" Version="1.1.13" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="privkey.pem">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="sampleHentMøteplan.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="sampleSendeUtvalgssak.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="sampleSendeOrienteringssak.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Utvalg\sampleSendeVedtakFraUtvalg.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="sampleSendeDelegertVedtak.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Utvalg\sampleResultatMøteplan.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="schema\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+</Project>

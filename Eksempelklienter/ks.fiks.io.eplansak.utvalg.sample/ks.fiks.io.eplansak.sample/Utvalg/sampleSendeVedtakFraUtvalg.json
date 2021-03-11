@@ -1,0 +1,37 @@
+{
+  "arealplanId": {
+    "administrativEnhet": "0821",
+    "planidentifikasjon": "01_27_1988"
+  },
+  "planstatus": {
+    "kodeverdi": "3",
+    "kodebeskrivelse": "Endelig vedtatt arealplan"
+  },
+  "planbehandlingstype": {
+    "kodeverdi": "13",
+    "kodebeskrivelse": "Plan vedtatt med innsigelse"
+  },
+
+  "saksnummer": {
+    "saksaar": "2019",
+    "sakssekvensnummer": "2234480"
+  },
+  "vedtak": "2019-06-05",
+  "vedlegg": [
+    {
+      "dokumenttype": "VEDTAK",
+      "filnavn": "K-sak 112-12.pdf"
+    },
+    {
+      "dokumenttype": "PLANKART",
+      "filnavn": "06_36_2012_plankart.pdf"
+    },
+    {
+      "dokumenttype": "PLANBEST",
+      "filnavn": "06_36_2012_føresegner.pdf"
+    }
+  ]
+}
+
+
+

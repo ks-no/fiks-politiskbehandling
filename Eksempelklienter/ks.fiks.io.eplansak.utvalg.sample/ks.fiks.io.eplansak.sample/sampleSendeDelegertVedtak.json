@@ -1,0 +1,36 @@
+{
+  "forslagTilBehandlingsplan": {
+    "tilUtvalgId": "1",
+    "tilUtvalgNavn": "Plan og byggesak"
+  },
+  "sak": {
+    "referanseEksternNøkkel": {
+      "fagsystem": "ePlansak",
+      "nøkkel": "AB123456789"
+    },
+    "fagsystemetsSaksnummer": {
+      "saksår": 2021,
+      "sakssekvensnummer": 1
+    },
+    "tittel": "Vedtak om ...",
+    "vedtaksdato": "2021-01-01",
+    "hoveddokument": {
+      "tittel": "Vedtak om ...",
+      "skjermetDokument": false,
+      "dokumenttype": {
+        "kodeverdi": "VEDTAK"
+      },
+      "referanseDokumentfil": "vedtak.doc"
+    },
+    "vedtak": {
+      "tekstInnhold": "... vedtar å legge forslag til.....Vedtaket fattes i henhold til plan- og bygningslovens § 12-11, jf. 12-10. ",
+      "tekstFormat": {
+        "kodeverdi": "markup"
+      }
+    },
+    "saksansvarlig": "saksb"
+    
+  }
+}
+
+
