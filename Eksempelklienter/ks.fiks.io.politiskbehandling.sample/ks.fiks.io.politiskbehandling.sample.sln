@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ks.fiks.io.politiskbehandling.sample", "ks.fiks.io.politiskbehandling.sample\ks.fiks.io.politiskbehandling.sample.csproj", "{B6C4B8BB-6238-4CA0-95AD-5B6D5B882FA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6C4B8BB-6238-4CA0-95AD-5B6D5B882FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6C4B8BB-6238-4CA0-95AD-5B6D5B882FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6C4B8BB-6238-4CA0-95AD-5B6D5B882FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6C4B8BB-6238-4CA0-95AD-5B6D5B882FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72D0D320-C5B8-40AE-94A8-77E2972F28A2}
+	EndGlobalSection
+EndGlobal
