@@ -17,21 +17,15 @@
       "tittel": "OMRÅDEREGULERING FOR HIS Allè - BEHANDLING FØR HØRING OG UTLEGGING TIL OFFENTLIG ETTERSYN",
       "skjermetDokument": false,
       "dokumenttype": {
-        "kodeverdi": "SAKSFRAMLEGG"
+        "kodeverdi": "VEDTAK"
       },
-      "referanseDokumentfil": "saksframlegg.docx",
+      "referanseDokumentfil": "https://fiks.ks.no/dokumentlager/kommunex/vedtak.docx",
       "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     },
     "saksbeskrivelse": {
       "tekstInnhold": "beskrivelse av saken",
       "tekstFormat": {
         "kodeverdi": "tekst"
-      }
-    },
-    "forslagTilVedtak": {
-      "tekstInnhold": "... vedtar å legge forslag til detaljreguleringsplan for Nepåkeren med planid 2019005 ut til høring og offentlig ettersyn. Planforslaget er vist på kart i målestokk 1:2000 i A1, merket Bodø kommune datert 13.12.2019 og i bestemmelser sist endret 16.12.2019, og planbeskrivelse datert 11.12.2019. * Vedtaket fattes i henhold til plan- og bygningslovens § 12-11, jf. 12-10. ",
-      "tekstFormat": {
-        "kodeverdi": "markup"
       }
     },
     "saksansvarlig": "saksb",
@@ -63,5 +57,3 @@
     ]
   }
 }
-
-

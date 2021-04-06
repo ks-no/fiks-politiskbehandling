@@ -22,6 +22,9 @@
     <None Update="privkey.pem">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="sampleeInnsyn.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="sampleResultat.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
