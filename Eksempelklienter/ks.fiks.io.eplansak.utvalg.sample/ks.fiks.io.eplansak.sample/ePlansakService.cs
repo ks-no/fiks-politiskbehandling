@@ -109,7 +109,7 @@ namespace ks.fiks.io.eplansak.utvalg.sample
             var messageRequest = new MeldingRequest(
                                       mottakerKontoId: receiverId,
                                       avsenderKontoId: senderId,
-                                      meldingType: "no.ks.fiks.politisk.behandling.avsender.hentmøteplan.v1"); 
+                                      meldingType: "no.ks.fiks.politisk.behandling.klient.hentmøteplan.v1"); 
                                                                                                                  
 
 
@@ -130,7 +130,7 @@ namespace ks.fiks.io.eplansak.utvalg.sample
             var messageRequest = new MeldingRequest(
                                       mottakerKontoId: receiverId,
                                       avsenderKontoId: senderId,
-                                      meldingType: "no.ks.fiks.politisk.behandling.avsender.sendutvalgssak.v1"); // Message type as string https://fiks.ks.no/plan.oppretteplanidentinput.v1.schema.json
+                                      meldingType: "no.ks.fiks.politisk.behandling.klient.sendutvalgssak.v1"); // Message type as string https://fiks.ks.no/plan.oppretteplanidentinput.v1.schema.json
                                                                                                         //Se oversikt over meldingstyper på https://github.com/ks-no/fiks-io-meldingstype-katalog/tree/test/schema
 
            // client.Lookup(new LookupRequest("", "", 3));
@@ -158,7 +158,7 @@ namespace ks.fiks.io.eplansak.utvalg.sample
             var messageRequest = new MeldingRequest(
                                       mottakerKontoId: receiverId,
                                       avsenderKontoId: senderId,
-                                      meldingType: "no.ks.fiks.politisk.behandling.avsender.sendorienteringssak.v1"); // Message type as string https://fiks.ks.no/plan.oppretteplanidentinput.v1.schema.json
+                                      meldingType: "no.ks.fiks.politisk.behandling.klient.sendorienteringssak.v1"); // Message type as string https://fiks.ks.no/plan.oppretteplanidentinput.v1.schema.json
                                                                                                                  //Se oversikt over meldingstyper på https://github.com/ks-no/fiks-io-meldingstype-katalog/tree/test/schema
 
             // client.Lookup(new LookupRequest("", "", 3));
@@ -184,7 +184,7 @@ namespace ks.fiks.io.eplansak.utvalg.sample
             var messageRequest = new MeldingRequest(
                                       mottakerKontoId: receiverId,
                                       avsenderKontoId: senderId,
-                                      meldingType: "no.ks.fiks.politisk.behandling.avsender.senddelegertvedtak.v1"); // Message type as string https://fiks.ks.no/plan.oppretteplanidentinput.v1.schema.json
+                                      meldingType: "no.ks.fiks.politisk.behandling.klient.senddelegertvedtak.v1"); // Message type as string https://fiks.ks.no/plan.oppretteplanidentinput.v1.schema.json
                                                                                                                       //Se oversikt over meldingstyper på https://github.com/ks-no/fiks-io-meldingstype-katalog/tree/test/schema
 
             // client.Lookup(new LookupRequest("", "", 3));
@@ -210,7 +210,7 @@ namespace ks.fiks.io.eplansak.utvalg.sample
 
             // Process the message
 
-            if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.mottak.resultatmøteplan.v1")
+            if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.tjener.resultatmøteplan.v1")
             {
                 Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
 
@@ -221,7 +221,7 @@ namespace ks.fiks.io.eplansak.utvalg.sample
                 fileArgs.SvarSender.Ack(); // Ack message to remove it from the queue
 
             }
-            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.mottak.sendevedtakfrautvalg.v1")
+            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.tjener.sendevedtakfrautvalg.v1")
             {
                 Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
 

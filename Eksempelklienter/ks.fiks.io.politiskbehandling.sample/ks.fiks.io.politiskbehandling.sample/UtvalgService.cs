@@ -86,7 +86,7 @@ namespace ks.fiks.io.politiskbehandling.sample
 
             // Process the message
 
-            if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.avsender.hentmøteplan.v1")
+            if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.hentmøteplan.v1")
             {
                 Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
                 
@@ -94,13 +94,13 @@ namespace ks.fiks.io.politiskbehandling.sample
 
                 string payload = File.ReadAllText("sampleResultat.json");
                 
-                var svarmsg = fileArgs.SvarSender.Svar("no.ks.fiks.politisk.behandling.mottak.resultatmøteplan.v1", payload, "resultat.json").Result;
+                var svarmsg = fileArgs.SvarSender.Svar("no.ks.fiks.politisk.behandling.tjener.resultatmøteplan.v1", payload, "resultat.json").Result;
                 Console.WriteLine("Svarmelding " + svarmsg.MeldingId + " " + svarmsg.MeldingType + " sendt...");
                 Console.WriteLine(payload);
 
                 fileArgs.SvarSender.Ack(); // Ack message to remove it from the queue
             }
-            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.avsender.sendutvalgssak.v1")
+            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.sendutvalgssak.v1")
             {
                 Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
 
@@ -112,7 +112,7 @@ namespace ks.fiks.io.politiskbehandling.sample
 
                 fileArgs.SvarSender.Ack(); // Ack message to remove it from the queue
             }
-            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.avsender.sendorienteringssak.v1")
+            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.sendorienteringssak.v1")
             {
                 Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
 
@@ -124,7 +124,7 @@ namespace ks.fiks.io.politiskbehandling.sample
 
                 fileArgs.SvarSender.Ack(); // Ack message to remove it from the queue
             }
-            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.avsender.senddelegertvedtak.v1")
+            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.senddelegertvedtak.v1")
             {
                 Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
 
