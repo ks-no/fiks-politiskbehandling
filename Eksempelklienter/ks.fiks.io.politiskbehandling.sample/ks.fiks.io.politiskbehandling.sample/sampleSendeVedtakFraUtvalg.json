@@ -1,39 +1,41 @@
 {
-  "fraUtvalgId": "12334345345345",
-  "fraUtvalgNavn": "Plan og byggesak",
-  "arealplanId": {
-    "administrativEnhet": "0821",
-    "planidentifikasjon": "01_27_1988"
-  },
-  "planstatus": {
-    "kodeverdi": "3",
-    "kodebeskrivelse": "Endelig vedtatt arealplan"
-  },
-  "planbehandlingstype": {
-    "kodeverdi": "13",
-    "kodebeskrivelse": "Plan vedtatt med innsigelse"
-  },
-
-  "saksnummer": {
-    "saksaar": "2019",
-    "sakssekvensnummer": "2234480"
-  },
-  "vedtak": "2019-06-05",
-  "vedlegg": [
-    {
-      "dokumenttype": "VEDTAK",
-      "filnavn": "K-sak 112-12.pdf"
+  "utvalgId": "345345345345",
+  "utvalgNavn": "Kommunestyre",
+  "møteId": "3",
+  "møtedato": "2021-05-20",
+  "erEndeligVedtak": true,
+  "sak": {
+    "referanseEksternNøkkel": {
+      "fagsystem": "Politisk behandling",
+      "nøkkel": "PB123456789"
     },
-    {
-      "dokumenttype": "PLANKART",
-      "filnavn": "06_36_2012_plankart.pdf"
+    "fagsystemetsSaksnummer": {
+      "saksår": 2021,
+      "sakssekvensnummer": 1
     },
-    {
-      "dokumenttype": "PLANBEST",
-      "filnavn": "06_36_2012_føresegner.pdf"
-    }
-  ]
+    "utvalgetsSaksnummer": {
+      "saksår": 2021,
+      "sakssekvensnummer": 34
+    },
+    "tittel": "OMRÅDEREGULERING FOR HIS Allè - Endelig vedtak",
+    "vedtaksdato": "2021-05-20",
+    "hoveddokument": {
+      "tittel": "OMRÅDEREGULERING FOR HIS Allè - Endelig vedtak",
+      "skjermetDokument": false,
+      "dokumenttype": {
+        "kodeverdi": "VEDTAK"
+      },
+      "referanseDokumentfil": "vedtak.docx",
+      "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    },
+    "vedtak": {
+      "tekstInnhold": "Områderegulering for His Allè med tilhørende reguleringsbestemmelser vedtas. ....",
+      "tekstFormat": {
+        "kodeverdi": "markup"
+      }
+    },
+    "saksansvarlig": "saksb.politisk"
+    
+  }
 }
-
-
 
