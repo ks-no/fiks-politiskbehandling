@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://no.fiks.ks.utvalg/SendeDelegertVedtak.v1.schema.json",
+  "$id": "https://no.ks.fiks.politisk.behandling/SendeDelegertVedtak.v1.schema.json",
   "title": "SendeDelegertVedtak",
   "definitions": {
     "Vedlegg": {
@@ -51,27 +51,11 @@
   },
   "type": "object",
   "properties": {
-    "forslagTilBehandlingsplan": {
-      "type": "object",
-      "properties": {
-        "tilUtvalgId": {
-          "type": "string"
-        },
-        "tilUtvalgNavn": {
-          "type": "string"
-        },
-        "tilMøteId": {
-          "type": "string"
-        },
-        "tilMøtedato": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "tilUtvalgId",
-        "tilUtvalgNavn"
-      ]
+    "tilUtvalgId": {
+      "type": "string"
+    },
+    "tilUtvalgNavn": {
+      "type": "string"
     },
     "sak": {
       "type": "object",
@@ -92,6 +76,21 @@
           ]
         },
         "fagsystemetsSaksnummer": {
+          "type": "object",
+          "properties": {
+            "saksår": {
+              "type": "integer"
+            },
+            "sakssekvensnummer": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "saksår",
+            "sakssekvensnummer"
+          ]
+        },
+        "utvalgetsSaksnummer": {
           "type": "object",
           "properties": {
             "saksår": {
@@ -216,7 +215,8 @@
     }
   },
   "required": [
-    "forslagTilBehandlingsplan",
+    "tilUtvalgId",
+    "tilUtvalgNavn",
     "sak"
   ]
 }

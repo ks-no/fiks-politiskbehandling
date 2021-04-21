@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://no.fiks.ks.utvalg/SendeVedtakFraUtvalg.v1.schema.json",
+  "$id": "https://no.ks.fiks.politisk.behandling/SendeVedtakFraUtvalg.v1.schema.json",
   "title": "SendeVedtakFraUtvalg",
   "definitions": {
     "Vedlegg": {

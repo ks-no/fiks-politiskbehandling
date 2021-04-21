@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://no.fiks.ks.utvalg/SendeUtvalgssak.v1.schema.json",
-  "title": "SendeUtvalgssak",
+  "$id": "https://no.ks.fiks.politisk.behandling/SendeOrienteringssak.v1.schema.json",
+  "title": "SendeOrienteringssak",
   "definitions": {
     "Vedlegg": {
       "type": "object",
@@ -140,25 +140,6 @@
           ]
         },
         "saksbeskrivelse": {
-          "type": "object",
-          "properties": {
-            "tekstInnhold": {
-              "type": "string"
-            },
-            "tekstFormat": {
-              "type": "object",
-              "properties": {
-                "kodeverdi": {
-                  "type": "string"
-                },
-                "kodebeskrivelse": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        },
-        "forslagTilVedtak": {
           "type": "object",
           "properties": {
             "tekstInnhold": {

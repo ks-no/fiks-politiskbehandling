@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://no.fiks.ks.utvalg/HentMøteplan.v1.schema.json",
-  "title": "HentMøteplan",
+  "$id": "https://no.ks.fiks.politisk.behandling/HentUtvalg.v1.schema.json",
+  "title": "HentUtvalg",
   "definitions": {
     "Vedlegg": {
       "type": "object",
@@ -49,16 +49,5 @@
       ]
     }
   },
-  "type": "object",
-  "properties": {
-    "utvalgNavn": {
-      "type": "string"
-    },
-    "inkluderMøter": {
-      "type": "boolean"
-    }
-  },
-  "required": [
-    "inkluderMøter"
-  ]
+  "type": "object"
 }
