@@ -1,8 +1,6 @@
 {
-  "forslagTilBehandlingsplan": {
-    "tilUtvalgId": "1",
-    "tilUtvalgNavn": "Plan og byggesak"
-  },
+  "tilUtvalgId": "12334345345345",
+  "tilUtvalgNavn": "Plan og byggesak",
   "sak": {
     "referanseEksternNøkkel": {
       "fagsystem": "ePlansak",
@@ -29,7 +27,7 @@
       }
     },
     "saksansvarlig": "saksb"
-    
+
   }
 }
 
