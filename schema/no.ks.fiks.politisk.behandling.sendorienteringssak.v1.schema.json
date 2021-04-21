@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://no.ks.fiks.politisk.behandling/SendeVedtakFraUtvalg.v1.schema.json",
-  "title": "SendeVedtakFraUtvalg",
+  "$id": "https://no.ks.fiks.politisk.behandling/SendOrienteringssak.v1.schema.json",
+  "title": "SendOrienteringssak",
   "definitions": {
     "Vedlegg": {
       "type": "object",
@@ -51,21 +51,27 @@
   },
   "type": "object",
   "properties": {
-    "utvalgId": {
-      "type": "string"
-    },
-    "utvalgNavn": {
-      "type": "string"
-    },
-    "møteId": {
-      "type": "string"
-    },
-    "møtedato": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "erEndeligVedtak": {
-      "type": "boolean"
+    "forslagTilBehandlingsplan": {
+      "type": "object",
+      "properties": {
+        "tilUtvalgId": {
+          "type": "string"
+        },
+        "tilUtvalgNavn": {
+          "type": "string"
+        },
+        "tilMøteId": {
+          "type": "string"
+        },
+        "tilMøtedato": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "tilUtvalgId",
+        "tilUtvalgNavn"
+      ]
     },
     "sak": {
       "type": "object",
@@ -100,38 +106,8 @@
             "sakssekvensnummer"
           ]
         },
-        "utvalgetsSaksnummer": {
-          "type": "object",
-          "properties": {
-            "saksår": {
-              "type": "integer"
-            },
-            "sakssekvensnummer": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "saksår",
-            "sakssekvensnummer"
-          ]
-        },
         "tittel": {
           "type": "string"
-        },
-        "vedtaksdato": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "status": {
-          "type": "object",
-          "properties": {
-            "kodeverdi": {
-              "type": "string"
-            },
-            "kodebeskrivelse": {
-              "type": "string"
-            }
-          }
         },
         "hoveddokument": {
           "type": "object",
@@ -163,7 +139,7 @@
             "referanseDokumentfil"
           ]
         },
-        "vedtak": {
+        "saksbeskrivelse": {
           "type": "object",
           "properties": {
             "tekstInnhold": {
@@ -200,50 +176,12 @@
             "skjermingshjemmel"
           ]
         },
-        "sakansvarlig": {
+        "saksansvarlig": {
           "type": "string"
         },
         "posisjon": {
           "description": "Punkt",
           "type": "object"
-        },
-        "votering": {
-          "type": "object",
-          "properties": {
-            "møtedeltaker": {
-              "type": "string"
-            },
-            "representerer": {
-              "type": "string"
-            },
-            "stemme": {
-              "type": "object",
-              "properties": {
-                "Ja": {
-                  "description": "None",
-                  "type": "object"
-                },
-                "Nei": {
-                  "description": "None",
-                  "type": "object"
-                },
-                "Blankt": {
-                  "description": "None",
-                  "type": "object"
-                }
-              },
-              "required": [
-                "Ja",
-                "Nei",
-                "Blankt"
-              ]
-            }
-          },
-          "required": [
-            "møtedeltaker",
-            "representerer",
-            "stemme"
-          ]
         },
         "vedlegg": {
           "type": "array",
@@ -255,19 +193,13 @@
       "required": [
         "referanseEksternNøkkel",
         "fagsystemetsSaksnummer",
-        "utvalgetsSaksnummer",
         "tittel",
-        "vedtaksdato",
-        "sakansvarlig"
+        "saksansvarlig"
       ]
     }
   },
   "required": [
-    "utvalgId",
-    "utvalgNavn",
-    "møteId",
-    "møtedato",
-    "erEndeligVedtak",
+    "forslagTilBehandlingsplan",
     "sak"
   ]
 }

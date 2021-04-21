@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://no.ks.fiks.politisk.behandling/SendeOrienteringssak.v1.schema.json",
-  "title": "SendeOrienteringssak",
+  "$id": "https://no.ks.fiks.politisk.behandling/SendDelegertVedtak.v1.schema.json",
+  "title": "SendDelegertVedtak",
   "definitions": {
     "Vedlegg": {
       "type": "object",
@@ -51,27 +51,11 @@
   },
   "type": "object",
   "properties": {
-    "forslagTilBehandlingsplan": {
-      "type": "object",
-      "properties": {
-        "tilUtvalgId": {
-          "type": "string"
-        },
-        "tilUtvalgNavn": {
-          "type": "string"
-        },
-        "tilMøteId": {
-          "type": "string"
-        },
-        "tilMøtedato": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "tilUtvalgId",
-        "tilUtvalgNavn"
-      ]
+    "tilUtvalgId": {
+      "type": "string"
+    },
+    "tilUtvalgNavn": {
+      "type": "string"
     },
     "sak": {
       "type": "object",
@@ -106,8 +90,38 @@
             "sakssekvensnummer"
           ]
         },
+        "utvalgetsSaksnummer": {
+          "type": "object",
+          "properties": {
+            "saksår": {
+              "type": "integer"
+            },
+            "sakssekvensnummer": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "saksår",
+            "sakssekvensnummer"
+          ]
+        },
         "tittel": {
           "type": "string"
+        },
+        "vedtaksdato": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "kodeverdi": {
+              "type": "string"
+            },
+            "kodebeskrivelse": {
+              "type": "string"
+            }
+          }
         },
         "hoveddokument": {
           "type": "object",
@@ -139,7 +153,7 @@
             "referanseDokumentfil"
           ]
         },
-        "saksbeskrivelse": {
+        "vedtak": {
           "type": "object",
           "properties": {
             "tekstInnhold": {
@@ -194,12 +208,15 @@
         "referanseEksternNøkkel",
         "fagsystemetsSaksnummer",
         "tittel",
+        "vedtaksdato",
+        "status",
         "saksansvarlig"
       ]
     }
   },
   "required": [
-    "forslagTilBehandlingsplan",
+    "tilUtvalgId",
+    "tilUtvalgNavn",
     "sak"
   ]
 }

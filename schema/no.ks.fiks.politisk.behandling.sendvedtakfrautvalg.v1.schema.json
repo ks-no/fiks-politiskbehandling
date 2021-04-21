@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://no.ks.fiks.politisk.behandling/SendeDelegertVedtak.v1.schema.json",
-  "title": "SendeDelegertVedtak",
+  "$id": "https://no.ks.fiks.politisk.behandling/SendVedtakFraUtvalg.v1.schema.json",
+  "title": "SendVedtakFraUtvalg",
   "definitions": {
     "Vedlegg": {
       "type": "object",
@@ -51,11 +51,21 @@
   },
   "type": "object",
   "properties": {
-    "tilUtvalgId": {
+    "utvalgId": {
       "type": "string"
     },
-    "tilUtvalgNavn": {
+    "utvalgNavn": {
       "type": "string"
+    },
+    "møteId": {
+      "type": "string"
+    },
+    "møtedato": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "erEndeligVedtak": {
+      "type": "boolean"
     },
     "sak": {
       "type": "object",
@@ -190,12 +200,50 @@
             "skjermingshjemmel"
           ]
         },
-        "saksansvarlig": {
+        "sakansvarlig": {
           "type": "string"
         },
         "posisjon": {
           "description": "Punkt",
           "type": "object"
+        },
+        "votering": {
+          "type": "object",
+          "properties": {
+            "møtedeltaker": {
+              "type": "string"
+            },
+            "representerer": {
+              "type": "string"
+            },
+            "stemme": {
+              "type": "object",
+              "properties": {
+                "Ja": {
+                  "description": "None",
+                  "type": "object"
+                },
+                "Nei": {
+                  "description": "None",
+                  "type": "object"
+                },
+                "Blankt": {
+                  "description": "None",
+                  "type": "object"
+                }
+              },
+              "required": [
+                "Ja",
+                "Nei",
+                "Blankt"
+              ]
+            }
+          },
+          "required": [
+            "møtedeltaker",
+            "representerer",
+            "stemme"
+          ]
         },
         "vedlegg": {
           "type": "array",
@@ -207,16 +255,19 @@
       "required": [
         "referanseEksternNøkkel",
         "fagsystemetsSaksnummer",
+        "utvalgetsSaksnummer",
         "tittel",
         "vedtaksdato",
-        "status",
-        "saksansvarlig"
+        "sakansvarlig"
       ]
     }
   },
   "required": [
-    "tilUtvalgId",
-    "tilUtvalgNavn",
+    "utvalgId",
+    "utvalgNavn",
+    "møteId",
+    "møtedato",
+    "erEndeligVedtak",
     "sak"
   ]
 }
