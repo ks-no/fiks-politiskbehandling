@@ -1,4 +1,5 @@
 ﻿using Ks.Fiks.Maskinporten.Client;
+using KS.Fiks.ASiC_E;
 using KS.Fiks.IO.Client;
 using KS.Fiks.IO.Client.Configuration;
 using KS.Fiks.IO.Client.Models;
@@ -80,75 +81,112 @@ namespace ks.fiks.io.politiskbehandling.sample
                 return Task.CompletedTask;
             }
 
-            static void OnReceivedMelding(object sender, MottattMeldingArgs fileArgs)
+            static void OnReceivedMelding(object sender, MottattMeldingArgs mottatt)
             {
             //Se oversikt over meldingstyper på https://github.com/ks-no/fiks-io-meldingstype-katalog/tree/test/schema
 
             // Process the message
 
-            if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.hentmøteplan.v1")
+            if (mottatt.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.hentmøteplan.v1")
             {
-                Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
-                
+                Console.WriteLine("Melding " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType + " mottas...");
+
                 //TODO håndtere meldingen med ønsket funksjonalitet
 
+                if (mottatt.Melding.HasPayload)
+                { // Verify that message has payload
+
+                    IAsicReader reader = new AsiceReader();
+                    using (var inputStream = mottatt.Melding.DecryptedStream.Result)
+                    using (var asice = reader.Read(inputStream))
+                    {
+                        foreach (var asiceReadEntry in asice.Entries)
+                        {
+                            using (var entryStream = asiceReadEntry.OpenStream())
+                            {
+                                if (asiceReadEntry.FileName.Contains(".json")) //TODO regel på navning? 
+                                {
+
+                                    var newEntryStream = asiceReadEntry.OpenStream();
+                                    StreamReader reader1 = new StreamReader(newEntryStream);
+                                    string text = reader1.ReadToEnd();
+
+                                    Console.WriteLine(text);
+
+                                }
+                                else
+                                    Console.WriteLine("Mottatt vedlegg: " + asiceReadEntry.FileName);
+
+                            }
+                        }
+                        // Check that all digests declared in the manifest are valid
+                        if (asice.DigestVerifier.Verification().AllValid)
+                        {
+                            // Do something
+                        }
+                        else
+                        {
+                            // Handle error
+                        }
+                    }
+                }
                 string payload = File.ReadAllText("sampleResultat.json");
                 
-                var svarmsg = fileArgs.SvarSender.Svar("no.ks.fiks.politisk.behandling.tjener.resultatmøteplan.v1", payload, "resultat.json").Result;
+                var svarmsg = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.tjener.resultatmøteplan.v1", payload, "resultat.json").Result;
                 Console.WriteLine("Svarmelding " + svarmsg.MeldingId + " " + svarmsg.MeldingType + " sendt...");
                 Console.WriteLine(payload);
 
-                fileArgs.SvarSender.Ack(); // Ack message to remove it from the queue
+                mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
             }
-            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.sendutvalgssak.v1")
+            else if (mottatt.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.sendutvalgssak.v1")
             {
-                Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
+                Console.WriteLine("Melding " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType + " mottas...");
 
                 //TODO håndtere meldingen med ønsket funksjonalitet
                 
-                var svarmsg = fileArgs.SvarSender.Svar("no.ks.geointegrasjon.ok.v1").Result;
+                var svarmsg = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.mottatt.v1").Result;
                 Console.WriteLine("Svarmelding " + svarmsg.MeldingId + " " + svarmsg.MeldingType + " sendt...");
-               
 
-                fileArgs.SvarSender.Ack(); // Ack message to remove it from the queue
+
+                    mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
             }
-            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.sendorienteringssak.v1")
+            else if (mottatt.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.sendorienteringssak.v1")
             {
-                Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
+                Console.WriteLine("Melding " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType + " mottas...");
 
                 //TODO håndtere meldingen med ønsket funksjonalitet
 
-                var svarmsg = fileArgs.SvarSender.Svar("no.ks.geointegrasjon.ok.v1").Result;
+                var svarmsg = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.mottatt.v1").Result;
                 Console.WriteLine("Svarmelding " + svarmsg.MeldingId + " " + svarmsg.MeldingType + " sendt...");
 
 
-                fileArgs.SvarSender.Ack(); // Ack message to remove it from the queue
+                    mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
             }
-            else if (fileArgs.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.senddelegertvedtak.v1")
+            else if (mottatt.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.senddelegertvedtak.v1")
             {
-                Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
+                Console.WriteLine("Melding " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType + " mottas...");
 
                 //TODO håndtere meldingen med ønsket funksjonalitet
 
-                var svarmsg = fileArgs.SvarSender.Svar("no.ks.geointegrasjon.ok.v1").Result;
+                var svarmsg = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.mottatt.v1").Result;
                 Console.WriteLine("Svarmelding " + svarmsg.MeldingId + " " + svarmsg.MeldingType + " sendt...");
 
 
-                fileArgs.SvarSender.Ack(); // Ack message to remove it from the queue
+                    mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
             }
-            else if (fileArgs.Melding.MeldingType == "no.ks.geointegrasjon.ok.v1")
+            else if (mottatt.Melding.MeldingType == "no.ks.fiks.politisk.behandling.mottatt.v1")
             {
-                Console.WriteLine("Melding " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType + " mottas...");
+                Console.WriteLine("Melding " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType + " mottas...");
 
                 //TODO håndtere meldingen med ønsket funksjonalitet
 
                 Console.WriteLine("Melding er håndtert i ePlansak ok ......");
 
-                fileArgs.SvarSender.Ack(); // Ack message to remove it from the queue
+                    mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
 
             }
             else {
-                Console.WriteLine("Ubehandlet melding i køen " + fileArgs.Melding.MeldingId + " " + fileArgs.Melding.MeldingType);
+                Console.WriteLine("Ubehandlet melding i køen " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType);
                 //fileArgs.SvarSender.Ack(); // Ack message to remove it from the queue
             }
             }
