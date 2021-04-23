@@ -1,20 +1,20 @@
-{
+ï»¿{
   "forslagTilBehandlingsplan": {
     "tilUtvalgId": "1",
     "tilUtvalgNavn": "Plan og byggesak"
   },
   "sak": {
-    "referanseEksternNøkkel": {
+    "referanseEksternNÃ¸kkel": {
       "fagsystem": "ePlansak",
-      "nøkkel": "AB123456789"
+      "nÃ¸kkel": "AB123456789"
     },
     "fagsystemetsSaksnummer": {
-      "saksår": 2021,
+      "saksÃ¥r": 2021,
       "sakssekvensnummer": 1
     },
-    "tittel": "OMRÅDEREGULERING FOR HIS Allè - BEHANDLING FØR HØRING OG UTLEGGING TIL OFFENTLIG ETTERSYN",
+    "tittel": "OMRÃ…DEREGULERING FOR HIS AllÃ¨ - BEHANDLING FÃ˜R HÃ˜RING OG UTLEGGING TIL OFFENTLIG ETTERSYN",
     "hoveddokument": {
-      "tittel": "OMRÅDEREGULERING FOR HIS Allè - BEHANDLING FØR HØRING OG UTLEGGING TIL OFFENTLIG ETTERSYN",
+      "tittel": "OMRÃ…DEREGULERING FOR HIS AllÃ¨ - BEHANDLING FÃ˜R HÃ˜RING OG UTLEGGING TIL OFFENTLIG ETTERSYN",
       "skjermetDokument": false,
       "dokumenttype": {
         "kodeverdi": "VEDTAK"
@@ -31,7 +31,7 @@
     "saksansvarlig": "saksb",
     "vedlegg": [
       {
-        "tittel": "191216 Planbestemmelser for Nepåkeren",
+        "tittel": "191216 Planbestemmelser for NepÃ¥keren",
         "skjermetDokument": false,
         "dokumenttype": {
           "kodeverdi": "PLANBEST"
@@ -39,7 +39,7 @@
         "referanseDokumentfil": "planbestemmelser.pdf"
       },
       {
-        "tittel": "20191213 Plankart Nepåkeren A1",
+        "tittel": "20191213 Plankart NepÃ¥keren A1",
         "skjermetDokument": false,
         "dokumenttype": {
           "kodeverdi": "PLANKART"

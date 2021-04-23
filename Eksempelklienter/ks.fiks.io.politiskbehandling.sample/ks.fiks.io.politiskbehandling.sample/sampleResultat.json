@@ -1,14 +1,14 @@
-{
+ï»¿{
   "utvalgId": "12334345345345",
   "utvalgNavn": "Plan og byggesak",
-  "møte": [
+  "mÃ¸te": [
     {
-      "møteid": "34534",
-      "møtedato": "2021-03-12"
+      "mÃ¸teid": "34534",
+      "mÃ¸tedato": "2021-03-12"
     },
     {
-      "møteid": "234234",
-      "møtedato": "2021-05-16"
+      "mÃ¸teid": "234234",
+      "mÃ¸tedato": "2021-05-16"
     }
   ]
 

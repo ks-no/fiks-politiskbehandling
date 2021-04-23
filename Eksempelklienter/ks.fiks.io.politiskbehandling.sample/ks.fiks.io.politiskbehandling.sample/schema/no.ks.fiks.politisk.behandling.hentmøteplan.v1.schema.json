@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://no.ks.fiks.politisk.behandling/HentMøteplan.v1.schema.json",
+  "title": "HentMøteplan",
+  "definitions": {
+    "Vedlegg": {
+      "type": "object",
+      "properties": {
+        "tittel": {
+          "type": "string"
+        },
+        "skjermetDokument": {
+          "type": "boolean"
+        },
+        "dokumenttype": {
+          "type": "object",
+          "properties": {
+            "kodeverdi": {
+              "type": "string"
+            },
+            "kodebeskrivelse": {
+              "type": "string"
+            }
+          }
+        },
+        "referanseDokumentfil": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tittel",
+        "skjermetDokument",
+        "referanseDokumentfil"
+      ]
+    },
+    "Møte": {
+      "type": "object",
+      "properties": {
+        "møteid": {
+          "type": "string"
+        },
+        "møtedato": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "møteid"
+      ]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "utvalgNavn": {
+      "type": "string"
+    },
+    "inkluderMøter": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "inkluderMøter"
+  ]
+}
