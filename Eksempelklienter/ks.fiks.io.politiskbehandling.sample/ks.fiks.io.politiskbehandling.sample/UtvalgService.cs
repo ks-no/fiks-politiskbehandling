@@ -1,4 +1,4 @@
-﻿using Ks.Fiks.Maskinporten.Client;
+using Ks.Fiks.Maskinporten.Client;
 using KS.Fiks.ASiC_E;
 using KS.Fiks.IO.Client;
 using KS.Fiks.IO.Client.Configuration;
