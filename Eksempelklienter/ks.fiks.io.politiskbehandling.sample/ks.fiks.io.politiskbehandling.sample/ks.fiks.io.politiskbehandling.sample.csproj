@@ -1,10 +1,48 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="schema\no.ks.fiks.politisk.behandling.hentmøteplan.v1.schema.json" />
+    <None Remove="schema\no.ks.fiks.politisk.behandling.hentutvalg.v1.schema.json" />
+    <None Remove="schema\no.ks.fiks.politisk.behandling.resultatmøteplan.v1.schema.json" />
+    <None Remove="schema\no.ks.fiks.politisk.behandling.resultatutvalg.v1.schema.json" />
+    <None Remove="schema\no.ks.fiks.politisk.behandling.senddelegertvedtak.v1.schema.json" />
+    <None Remove="schema\no.ks.fiks.politisk.behandling.sendorienteringssak.v1.schema.json" />
+    <None Remove="schema\no.ks.fiks.politisk.behandling.sendutvalgssak.v1.schema.json" />
+    <None Remove="schema\no.ks.fiks.politisk.behandling.sendvedtakfrautvalg.v1.schema.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="schema\no.ks.fiks.politisk.behandling.hentmøteplan.v1.schema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="schema\no.ks.fiks.politisk.behandling.hentutvalg.v1.schema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="schema\no.ks.fiks.politisk.behandling.resultatmøteplan.v1.schema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="schema\no.ks.fiks.politisk.behandling.resultatutvalg.v1.schema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="schema\no.ks.fiks.politisk.behandling.senddelegertvedtak.v1.schema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="schema\no.ks.fiks.politisk.behandling.sendorienteringssak.v1.schema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="schema\no.ks.fiks.politisk.behandling.sendutvalgssak.v1.schema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="schema\no.ks.fiks.politisk.behandling.sendvedtakfrautvalg.v1.schema.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="KS.Fiks.IO.Client" Version="1.1.13" />
@@ -28,6 +66,12 @@
     </None>
     <None Update="sampleResultat.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="sampleResultatUtvalg.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="sampleSendeVedtakFraUtvalg.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

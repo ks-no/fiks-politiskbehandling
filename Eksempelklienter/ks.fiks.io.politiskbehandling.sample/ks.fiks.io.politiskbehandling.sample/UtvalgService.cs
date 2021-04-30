@@ -99,7 +99,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                     {
                         string payload = File.ReadAllText("sampleResultatUtvalg.json");
 
-                        errorMessages = ValidateJsonFile(payload, Path.Combine("..\\..\\..\\schema", "no.ks.fiks.politisk.behandling.resultatutvalg.v1.schema.json"));
+                        errorMessages = ValidateJsonFile(payload, Path.Combine("schema", "no.ks.fiks.politisk.behandling.resultatutvalg.v1.schema.json"));
 
                         if (errorMessages[0].Count == 0)
                         {
@@ -137,7 +137,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                             {
                                 if (asiceReadEntry.FileName.Contains(".json"))
                                 {
-                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("..\\..\\..\\schema", "no.ks.fiks.politisk.behandling.hentmøteplan.v1.schema.json"));
+                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("schema", "no.ks.fiks.politisk.behandling.hentmøteplan.v1.schema.json"));
                                 }
                                 else
                                     Console.WriteLine("Mottatt vedlegg: " + asiceReadEntry.FileName);
@@ -149,7 +149,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                     {
                         string payload = File.ReadAllText("sampleResultat.json");
 
-                        errorMessages = ValidateJsonFile(payload, Path.Combine("..\\..\\..\\schema", "no.ks.fiks.politisk.behandling.resultatmøteplan.v1.schema.json"));
+                        errorMessages = ValidateJsonFile(payload, Path.Combine("schema", "no.ks.fiks.politisk.behandling.resultatmøteplan.v1.schema.json"));
 
                         if (errorMessages[0].Count == 0)
                         {
@@ -206,7 +206,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                             {
                                 if (asiceReadEntry.FileName.Contains(".json"))
                                 {
-                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("..\\..\\..\\schema", "no.ks.fiks.politisk.behandling.sendutvalgssak.v1.schema.json"));
+                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("schema", "no.ks.fiks.politisk.behandling.sendutvalgssak.v1.schema.json"));
                                 }
                                 else
                                     Console.WriteLine("Mottatt vedlegg: " + asiceReadEntry.FileName);
@@ -258,7 +258,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                             {
                                 if (asiceReadEntry.FileName.Contains(".json"))
                                 {
-                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("..\\..\\..\\schema", "no.ks.fiks.politisk.behandling.sendorienteringssak.v1.schema.json"));
+                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("schema", "no.ks.fiks.politisk.behandling.sendorienteringssak.v1.schema.json"));
                                 }
                                 else
                                     Console.WriteLine("Mottatt vedlegg: " + asiceReadEntry.FileName);
@@ -275,13 +275,9 @@ namespace ks.fiks.io.politiskbehandling.sample
                     else
                     {
                         Console.WriteLine("Feil i validering av sendorienteringssak");
-                        foreach (string message in errorMessages[0])
-                        {
-                            var svarmsg2 = mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1").Result;
-                            //TODO: Håndtere feil ved validering av hentemøteplan
-                            Console.WriteLine(message);
-                            mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
-                        }
+                        var errorMessage = mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1", String.Join("\n ", errorMessages[0]), "feil.txt").Result;
+                        Console.WriteLine(String.Join("\n ", errorMessages[0]));
+                        mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
                     }
                 }
                 else
