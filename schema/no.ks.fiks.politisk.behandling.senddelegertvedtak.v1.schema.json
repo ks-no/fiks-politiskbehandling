@@ -33,6 +33,21 @@
         "referanseDokumentfil"
       ]
     },
+    "Utvalg": {
+      "type": "object",
+      "properties": {
+        "utvalgId": {
+          "type": "string"
+        },
+        "utvalgNavn": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "utvalgId",
+        "utvalgNavn"
+      ]
+    },
     "Møte": {
       "type": "object",
       "properties": {
@@ -46,6 +61,44 @@
       },
       "required": [
         "møteid"
+      ]
+    },
+    "Votering": {
+      "type": "object",
+      "properties": {
+        "møtedeltaker": {
+          "type": "string"
+        },
+        "representerer": {
+          "type": "string"
+        },
+        "stemme": {
+          "type": "object",
+          "properties": {
+            "Ja": {
+              "description": "None",
+              "type": "object"
+            },
+            "Nei": {
+              "description": "None",
+              "type": "object"
+            },
+            "Blankt": {
+              "description": "None",
+              "type": "object"
+            }
+          },
+          "required": [
+            "Ja",
+            "Nei",
+            "Blankt"
+          ]
+        }
+      },
+      "required": [
+        "møtedeltaker",
+        "representerer",
+        "stemme"
       ]
     }
   },
@@ -110,7 +163,7 @@
         },
         "vedtaksdato": {
           "type": "string",
-          "format": "date-time"
+          "format": "date"
         },
         "status": {
           "type": "object",

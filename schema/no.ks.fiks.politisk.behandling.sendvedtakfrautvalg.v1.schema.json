@@ -173,7 +173,7 @@
         },
         "vedtaksdato": {
           "type": "string",
-          "format": "date-time"
+          "format": "date"
         },
         "status": {
           "type": "object",
@@ -253,7 +253,7 @@
             "skjermingshjemmel"
           ]
         },
-        "sakansvarlig": {
+        "saksansvarlig": {
           "type": "string"
         },
         "posisjon": {
@@ -279,7 +279,7 @@
         "utvalgetsSaksnummer",
         "tittel",
         "vedtaksdato",
-        "sakansvarlig"
+        "saksansvarlig"
       ]
     }
   },
