@@ -1,4 +1,4 @@
-﻿using KS.Fiks.IO.Client;
+using KS.Fiks.IO.Client;
 using KS.Fiks.IO.Client.Models;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -280,6 +280,21 @@ namespace ks.fiks.io.eplansak.utvalg.sample
             store.Close();
 
             return cer;
+        }
+        private static List<List<string>> ValidateJsonFile(string jsonString, string pathToSchema)
+        {
+            List<List<string>> validationErrorMessages = new List<List<string>>() { new List<string>(), new List<string>() };
+            using (TextReader file = File.OpenText(pathToSchema))
+            {
+                JObject jObject = JObject.Parse(jsonString);
+                JSchema schema = JSchema.Parse(file.ReadToEnd());
+                //TODO:Skille mellom errors og warnings hvis det er 
+                jObject.Validate(schema, (o, a) =>
+                {
+                    validationErrorMessages[0].Add(a.Message);
+                });
+            }
+            return validationErrorMessages;
         }
     }
 }
