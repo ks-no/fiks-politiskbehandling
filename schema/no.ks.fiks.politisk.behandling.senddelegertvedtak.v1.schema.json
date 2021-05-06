@@ -48,6 +48,31 @@
         "utvalgNavn"
       ]
     },
+    "Behandlingsplan": {
+      "type": "object",
+      "properties": {
+        "tilUtvalgId": {
+          "type": "string"
+        },
+        "tilUtvalgNavn": {
+          "type": "string"
+        },
+        "tilMøteId": {
+          "type": "string"
+        },
+        "tilMøtedato": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "rekkefølge": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "tilUtvalgId",
+        "tilUtvalgNavn"
+      ]
+    },
     "Møte": {
       "type": "object",
       "properties": {
@@ -57,6 +82,9 @@
         "møtedato": {
           "type": "string",
           "format": "date-time"
+        },
+        "tittel": {
+          "type": "string"
         }
       },
       "required": [

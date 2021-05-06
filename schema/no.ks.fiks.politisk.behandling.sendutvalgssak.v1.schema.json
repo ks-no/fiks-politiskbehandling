@@ -48,6 +48,31 @@
         "utvalgNavn"
       ]
     },
+    "Behandlingsplan": {
+      "type": "object",
+      "properties": {
+        "tilUtvalgId": {
+          "type": "string"
+        },
+        "tilUtvalgNavn": {
+          "type": "string"
+        },
+        "tilMøteId": {
+          "type": "string"
+        },
+        "tilMøtedato": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "rekkefølge": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "tilUtvalgId",
+        "tilUtvalgNavn"
+      ]
+    },
     "Møte": {
       "type": "object",
       "properties": {
@@ -57,6 +82,9 @@
         "møtedato": {
           "type": "string",
           "format": "date-time"
+        },
+        "tittel": {
+          "type": "string"
         }
       },
       "required": [
@@ -104,28 +132,6 @@
   },
   "type": "object",
   "properties": {
-    "forslagTilBehandlingsplan": {
-      "type": "object",
-      "properties": {
-        "tilUtvalgId": {
-          "type": "string"
-        },
-        "tilUtvalgNavn": {
-          "type": "string"
-        },
-        "tilMøteId": {
-          "type": "string"
-        },
-        "tilMøtedato": {
-          "type": "string",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "tilUtvalgId",
-        "tilUtvalgNavn"
-      ]
-    },
     "sak": {
       "type": "object",
       "properties": {
@@ -268,10 +274,15 @@
         "tittel",
         "saksansvarlig"
       ]
+    },
+    "forslagTilBehandlingsplan": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Behandlingsplan"
+      }
     }
   },
   "required": [
-    "forslagTilBehandlingsplan",
     "sak"
   ]
 }
