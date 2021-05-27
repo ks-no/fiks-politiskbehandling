@@ -256,7 +256,7 @@ namespace ks.fiks.io.eplansak.utvalg.sample
                     }
                     else
                     {
-                        Console.WriteLine("Feil i validering av sendorienteringssak");
+                        Console.WriteLine("Feil i validering av sendvedtakfrautvalg");
                         var errorMessage = mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1", String.Join("\n ", errorMessages[0]), "feil.txt").Result;
 
                         Console.WriteLine(String.Join("\n ", errorMessages[0]));

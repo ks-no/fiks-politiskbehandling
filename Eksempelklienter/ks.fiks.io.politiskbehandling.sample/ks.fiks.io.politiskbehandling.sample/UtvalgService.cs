@@ -110,13 +110,10 @@ namespace ks.fiks.io.politiskbehandling.sample
                         }
                         else
                         {
-                            //TODO: Håndtere feil ved resultatmøteplanvalidering
                             Console.WriteLine("Feil i validering av utvalg");
-                            foreach (string message in errorMessages[0])
-                            {
-                                Console.WriteLine(message);
-                            }
-                        mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
+                            mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1", String.Join("\n ", errorMessages[0]), "feil.txt");
+                            Console.WriteLine(String.Join("\n ", errorMessages[0]));
+                            mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
                         }
                     }
             }
@@ -160,24 +157,18 @@ namespace ks.fiks.io.politiskbehandling.sample
                         }
                         else
                         {
-                            //TODO: Håndtere feil ved resultatmøteplanvalidering
                             Console.WriteLine("Feil i validering av resultatmøteplan");
-                            foreach (string message in errorMessages[0])
-                            {
-                                Console.WriteLine(message);
-                            }
+                            mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1", String.Join("\n ", errorMessages[0]), "feil.txt");
+                            Console.WriteLine(String.Join("\n ", errorMessages[0]));
                             mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
                         }
                     }
                     else
                     {
                         Console.WriteLine("Feil i validering av hentmøteplan");
-                        foreach (string message in errorMessages[0])
-                        {
-                            //TODO: Håndtere feil ved validering av hentemøteplan
-                            Console.WriteLine(message);
-                            mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
-                        }
+                        mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1", String.Join("\n ", errorMessages[0]), "feil.txt");
+                        Console.WriteLine(String.Join("\n ", errorMessages[0]));
+                        mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
                     }
                 }
                 else
@@ -223,13 +214,9 @@ namespace ks.fiks.io.politiskbehandling.sample
                     else
                     {
                         Console.WriteLine("Feil i validering av sendutvalgsak");
-                        foreach (string message in errorMessages[0])
-                        {
-                            var svarmsg2 = mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1").Result;
-                            //TODO: Håndtere feil ved validering av hentemøteplan
-                            Console.WriteLine(message);
-                            mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
-                        }
+                        mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1", String.Join("\n ", errorMessages[0]), "feil.txt");
+                        Console.WriteLine(String.Join("\n ", errorMessages[0]));
+                        mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
                     }
                 }
                 else
@@ -275,7 +262,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                     else
                     {
                         Console.WriteLine("Feil i validering av sendorienteringssak");
-                        var errorMessage = mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1", String.Join("\n ", errorMessages[0]), "feil.txt").Result;
+                        mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1", String.Join("\n ", errorMessages[0]), "feil.txt");
                         Console.WriteLine(String.Join("\n ", errorMessages[0]));
                         mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
                     }
