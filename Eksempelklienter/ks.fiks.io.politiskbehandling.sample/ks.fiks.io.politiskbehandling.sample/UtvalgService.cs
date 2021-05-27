@@ -11,9 +11,11 @@ using Newtonsoft.Json.Schema;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Threading.Tasks;
+using RabbitMQ.Client;
 
 namespace ks.fiks.io.politiskbehandling.sample
 {
@@ -21,25 +23,41 @@ namespace ks.fiks.io.politiskbehandling.sample
     public class UtvalgService : IHostedService, IDisposable
     {
         FiksIOClient client;
+        private readonly AppSettings appSettings;
 
-        public UtvalgService()
+
+        public UtvalgService(AppSettings appSettings)
         {
+            this.appSettings = appSettings;
+            client = CreateFiksIoClient();
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
             Console.WriteLine("Utvalg Service is starting.");
-            IConfiguration config = new ConfigurationBuilder()
-
-            .AddJsonFile("appsettings.json", true, true)
-            .AddJsonFile("appsettings.development.json", true, true)
-            .Build();
-
             Console.WriteLine("Setter opp FIKS integrasjon for politisk behandling...");
-            Guid accountId = Guid.Parse(config["accountId"]);  /* Fiks IO accountId as Guid Banke kommune digitalt planregister konto*/
-            string privateKey = File.ReadAllText("privkey.pem"); ; /* Private key for offentlig nøkkel supplied to Fiks IO account */
-            Guid integrationId = Guid.Parse(config["integrationId"]); /* Integration id as Guid ePlansak system X */
-            string integrationPassword = config["integrationPassword"];  /* Integration password */
+
+            client.NewSubscription(OnReceivedMelding);
+
+            Console.WriteLine("Abonnerer på meldinger på konto " + appSettings.FiksIOConfig.FiksIoAccountId + " ...");
+
+            return Task.CompletedTask;
+        }
+        
+        private FiksIOClient CreateFiksIoClient()
+        {
+            Console.WriteLine("Setter opp FIKS integrasjon for arkivsystem...");
+            var accountId = appSettings.FiksIOConfig.FiksIoAccountId;
+            var privateKey = File.ReadAllText(appSettings.FiksIOConfig.FiksIoPrivateKey);
+            var integrationId = appSettings.FiksIOConfig.FiksIoIntegrationId; 
+            var integrationPassword = appSettings.FiksIOConfig.FiksIoIntegrationPassword;
+            var scope = appSettings.FiksIOConfig.FiksIoIntegrationScope;
+            var audience = appSettings.FiksIOConfig.MaskinPortenAudienceUrl;
+            var tokenEndpoint = appSettings.FiksIOConfig.MaskinPortenTokenUrl;
+            var issuer = appSettings.FiksIOConfig.MaskinPortenIssuer;
+            
+            var ignoreSSLError = Environment.GetEnvironmentVariable("AMQP_IGNORE_SSL_ERROR");
+
 
             // Fiks IO account configuration
             var account = new KontoConfiguration(
@@ -49,38 +67,42 @@ namespace ks.fiks.io.politiskbehandling.sample
             // Id and password for integration associated to the Fiks IO account.
             var integration = new IntegrasjonConfiguration(
                                     integrationId,
-                                    integrationPassword, "ks:fiks");
+                                    integrationPassword, scope);
 
             // ID-porten machine to machine configuration
             var maskinporten = new MaskinportenClientConfiguration(
-                audience: @"https://oidc-ver2.difi.no/idporten-oidc-provider/", // ID-porten audience path
-                tokenEndpoint: @"https://oidc-ver2.difi.no/idporten-oidc-provider/token", // ID-porten token path
-                issuer: @"arkitektum_test",  // issuer name
-                numberOfSecondsLeftBeforeExpire: 10, // The token will be refreshed 10 seconds before it expires
-                certificate: GetCertificate(config["ThumbprintIdPortenVirksomhetssertifikat"]));
+                audience: audience,
+                tokenEndpoint: tokenEndpoint,
+                issuer: issuer,
+                numberOfSecondsLeftBeforeExpire: 10,
+                certificate: GetCertificate(appSettings));
 
             // Optional: Use custom api host (i.e. for connecting to test api)
             var api = new ApiConfiguration(
-                            scheme: "https",
-                            host: "api.fiks.test.ks.no",
-                            port: 443);
+                scheme: appSettings.FiksIOConfig.ApiScheme,
+                host: appSettings.FiksIOConfig.ApiHost,
+                port: appSettings.FiksIOConfig.ApiPort);
+            
+            var sslOption1 = (!string.IsNullOrEmpty(ignoreSSLError) && ignoreSSLError == "true")
+                ? new SslOption()
+                {
+                    Enabled = true,
+                    ServerName = appSettings.FiksIOConfig.AmqpHost,
+                    CertificateValidationCallback =
+                        (RemoteCertificateValidationCallback) ((sender, certificate, chain, errors) => true)
+                }
+                : null;
+                
 
             // Optional: Use custom amqp host (i.e. for connection to test queue)
             var amqp = new AmqpConfiguration(
-                            host: "io.fiks.test.ks.no",
-                            port: 5671);
+                host: appSettings.FiksIOConfig.AmqpHost, //"io.fiks.test.ks.no",
+                port: appSettings.FiksIOConfig.AmqpPort,
+                sslOption1);
 
             // Combine all configurations
             var configuration = new FiksIOConfiguration(account, integration, maskinporten, api, amqp);
-            client = new FiksIOClient(configuration); // See setup of configuration below
-
-
-
-            client.NewSubscription(OnReceivedMelding);
-
-            Console.WriteLine("Abonnerer på meldinger på konto " + accountId.ToString() + " ...");
-
-            return Task.CompletedTask;
+            return new FiksIOClient(configuration);
         }
 
         static void OnReceivedMelding(object sender, MottattMeldingArgs mottatt)
@@ -92,7 +114,6 @@ namespace ks.fiks.io.politiskbehandling.sample
             {
                 Console.WriteLine("Melding " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType + " mottas...");
 
-                
                     List<List<string>> errorMessages = new List<List<string>>() { new List<string>(), new List<string>() };
 
                     if (errorMessages[0].Count == 0)
@@ -348,22 +369,22 @@ namespace ks.fiks.io.politiskbehandling.sample
             client.Dispose();
         }
 
-        private static X509Certificate2 GetCertificate(string ThumbprintIdPortenVirksomhetssertifikat)
+        private static X509Certificate2 GetCertificate(AppSettings appSettings)
         {
-
-            //Det samme virksomhetssertifikat som er registrert hos ID-porten
-            X509Store store = new X509Store(StoreLocation.CurrentUser);
-            X509Certificate2 cer = null;
-            store.Open(OpenFlags.ReadOnly);
-            //Henter Arkitektum sitt virksomhetssertifikat
-            X509Certificate2Collection cers = store.Certificates.Find(X509FindType.FindByThumbprint, ThumbprintIdPortenVirksomhetssertifikat, false);
-            if (cers.Count > 0)
+            if (!string.IsNullOrEmpty(appSettings.FiksIOConfig.MaskinPortenCompanyCertificatePath))
             {
-                cer = cers[0];
-            };
+                return new X509Certificate2(File.ReadAllBytes(appSettings.FiksIOConfig.MaskinPortenCompanyCertificatePath), appSettings.FiksIOConfig.MaskinPortenCompanyCertificatePassword);
+            }
+           
+            var store = new X509Store(StoreLocation.CurrentUser);
+
+            store.Open(OpenFlags.ReadOnly);
+
+            var certificates = store.Certificates.Find(X509FindType.FindByThumbprint, appSettings.FiksIOConfig.MaskinPortenCompanyCertificateThumbprint, false);
+
             store.Close();
 
-            return cer;
+            return certificates.Count > 0 ? certificates[0] : null;
         }
     }
 

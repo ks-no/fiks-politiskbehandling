@@ -17,11 +17,23 @@ namespace ks.fiks.io.politiskbehandling.sample
         static async Task Main(string[] args)
         {
             await new HostBuilder()
-            .ConfigureServices((hostContext, services) =>
-            {
-                services.AddHostedService<UtvalgService>();
-            })
-            .RunConsoleAsync();
+                .ConfigureHostConfiguration((configHost) =>
+                {
+                    configHost.AddEnvironmentVariables("DOTNET_");
+                })
+                .ConfigureAppConfiguration((hostBuilder, config) =>
+                {
+                    config.SetBasePath(Directory.GetCurrentDirectory());
+                    config.AddJsonFile("appsettings.json", optional: true);
+                    config.AddJsonFile($"appsettings.{hostBuilder.HostingEnvironment.EnvironmentName}.json", optional: true);
+                    config.AddEnvironmentVariables("fiksPolitiskBehandlingMock_");
+                })
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddSingleton(AppSettingsBuilder.CreateAppSettings(hostContext.Configuration));
+                    services.AddHostedService<UtvalgService>();
+                })
+                .RunConsoleAsync();
         }
 
     }
