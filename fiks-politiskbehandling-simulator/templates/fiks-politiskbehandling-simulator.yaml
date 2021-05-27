@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fiks-politiskbehandling-simulator
+  annotations:
+    description: "Simulator for politiskbehandling som kjorer som en console app"
+    externalServices: "Fiks-io, maskinporten"
+  labels:
+    app: fiks-politiskbehandling-simulator
+    component: fiks-politiskbehandling-simulator
+    criticality: "NORMAL"
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  revisionHistoryLimit: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      component: fiks-politiskbehandling-simulator
+  template:
+    metadata:
+      labels:
+        component: fiks-politiskbehandling-simulator
+    spec:
+      containers:
+        - name: fiks-politiskbehandling-simulator
+          image: "{{ .Values.image.repository }}fiks-politiskbehandling-simulator:{{ .Values.image.tag }}"
+          env:
+            - name: KUBERNETES_NODE
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          envFrom:
+            - configMapRef:
+                name: fiks-politiskbehandling-simulator-config
+            - configMapRef:
+                name: fiks-hosts-config
+            - configMapRef:
+                name: maskinporten-config
+            - secretRef:
+                name: fiks-politiskbehandling-simulator-secret
+            - secretRef:
+                name: ks-virksomhetssertifikat
+          volumeMounts:
+            - name: ks-virksomhetssertifikat-store
+              readOnly: true
+              mountPath: /etc/fiks/ks-certs
+            - name: fiks-politiskbehandling-simulator-fiks-io-kryptering
+              readOnly: true
+              mountPath: /etc/fiks/fiks-io
+      volumes:
+        - name: ks-virksomhetssertifikat-store
+          secret:
+            secretName: ks-virksomhetssertifikat-store
+        - name: fiks-politiskbehandling-simulator-fiks-io-kryptering
+          secret:
+            secretName: fiks-politiskbehandling-simulator-fiks-io-kryptering
