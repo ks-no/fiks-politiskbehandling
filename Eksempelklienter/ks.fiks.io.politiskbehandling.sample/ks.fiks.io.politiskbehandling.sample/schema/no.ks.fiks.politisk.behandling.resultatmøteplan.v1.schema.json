@@ -3,36 +3,6 @@
   "$id": "https://no.ks.fiks.politisk.behandling/ResultatMøteplan.v1.schema.json",
   "title": "ResultatMøteplan",
   "definitions": {
-    "Vedlegg": {
-      "type": "object",
-      "properties": {
-        "tittel": {
-          "type": "string"
-        },
-        "skjermetDokument": {
-          "type": "boolean"
-        },
-        "dokumenttype": {
-          "type": "object",
-          "properties": {
-            "kodeverdi": {
-              "type": "string"
-            },
-            "kodebeskrivelse": {
-              "type": "string"
-            }
-          }
-        },
-        "referanseDokumentfil": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "tittel",
-        "skjermetDokument",
-        "referanseDokumentfil"
-      ]
-    },
     "Utvalg": {
       "type": "object",
       "properties": {
@@ -54,31 +24,6 @@
         "utvalgNavn"
       ]
     },
-    "Behandlingsplan": {
-      "type": "object",
-      "properties": {
-        "tilUtvalgId": {
-          "type": "string"
-        },
-        "tilUtvalgNavn": {
-          "type": "string"
-        },
-        "tilMøteId": {
-          "type": "string"
-        },
-        "tilMøtedato": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "rekkefølge": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "tilUtvalgId",
-        "tilUtvalgNavn"
-      ]
-    },
     "Møte": {
       "type": "object",
       "properties": {
@@ -95,44 +40,6 @@
       },
       "required": [
         "møteid"
-      ]
-    },
-    "Votering": {
-      "type": "object",
-      "properties": {
-        "møtedeltaker": {
-          "type": "string"
-        },
-        "representerer": {
-          "type": "string"
-        },
-        "stemme": {
-          "type": "object",
-          "properties": {
-            "Ja": {
-              "description": "None",
-              "type": "object"
-            },
-            "Nei": {
-              "description": "None",
-              "type": "object"
-            },
-            "Blankt": {
-              "description": "None",
-              "type": "object"
-            }
-          },
-          "required": [
-            "Ja",
-            "Nei",
-            "Blankt"
-          ]
-        }
-      },
-      "required": [
-        "møtedeltaker",
-        "representerer",
-        "stemme"
       ]
     }
   },

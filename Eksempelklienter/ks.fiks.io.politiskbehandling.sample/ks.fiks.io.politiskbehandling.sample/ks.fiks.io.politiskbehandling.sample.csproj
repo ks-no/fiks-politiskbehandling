@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <None Remove="schema\no.ks.fiks.politisk.behandling.hentmøteplan.v1.schema.json" />
-    <None Remove="schema\no.ks.fiks.politisk.behandling.hentutvalg.v1.schema.json" />
     <None Remove="schema\no.ks.fiks.politisk.behandling.resultatmøteplan.v1.schema.json" />
     <None Remove="schema\no.ks.fiks.politisk.behandling.resultatutvalg.v1.schema.json" />
     <None Remove="schema\no.ks.fiks.politisk.behandling.senddelegertvedtak.v1.schema.json" />
@@ -20,9 +19,6 @@
 
   <ItemGroup>
     <Content Include="schema\no.ks.fiks.politisk.behandling.hentmøteplan.v1.schema.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="schema\no.ks.fiks.politisk.behandling.hentutvalg.v1.schema.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="schema\no.ks.fiks.politisk.behandling.resultatmøteplan.v1.schema.json">
@@ -44,9 +40,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Remove="etc\fiks\fiks-io\development\privatekey.pem" />
-    <EmbeddedResource Include="etc\fiks\fiks-io\development\privatekey.pem" Condition="Exists('etc\fiks\fiks-io\development\privatekey.pem')" CopyToOutputDirectory="Always"/>
+    <EmbeddedResource Include="etc\fiks\fiks-io\development\privatekey.pem" Condition="Exists('etc\fiks\fiks-io\development\privatekey.pem')" CopyToOutputDirectory="Always" />
     <None Remove="etc\fiks\ks-certs\KS-virksomhetssertifikat-auth.p12" />
-    <EmbeddedResource Include="etc\fiks\ks-certs\KS-virksomhetssertifikat-auth.p12" Condition="Exists('etc\fiks\ks-certs\KS-virksomhetssertifikat-auth.p12')" CopyToOutputDirectory="Always"/>
+    <EmbeddedResource Include="etc\fiks\ks-certs\KS-virksomhetssertifikat-auth.p12" Condition="Exists('etc\fiks\ks-certs\KS-virksomhetssertifikat-auth.p12')" CopyToOutputDirectory="Always" />
   </ItemGroup>
 
   <ItemGroup>
