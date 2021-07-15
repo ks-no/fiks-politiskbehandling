@@ -43,19 +43,19 @@ namespace ks.fiks.io.politiskbehandling.sample
 
             return Task.CompletedTask;
         }
-        
+
         private FiksIOClient CreateFiksIoClient()
         {
             Console.WriteLine("Setter opp FIKS integrasjon for arkivsystem...");
             var accountId = appSettings.FiksIOConfig.FiksIoAccountId;
             var privateKey = File.ReadAllText(appSettings.FiksIOConfig.FiksIoPrivateKey);
-            var integrationId = appSettings.FiksIOConfig.FiksIoIntegrationId; 
+            var integrationId = appSettings.FiksIOConfig.FiksIoIntegrationId;
             var integrationPassword = appSettings.FiksIOConfig.FiksIoIntegrationPassword;
             var scope = appSettings.FiksIOConfig.FiksIoIntegrationScope;
             var audience = appSettings.FiksIOConfig.MaskinPortenAudienceUrl;
             var tokenEndpoint = appSettings.FiksIOConfig.MaskinPortenTokenUrl;
             var issuer = appSettings.FiksIOConfig.MaskinPortenIssuer;
-            
+
             var ignoreSSLError = Environment.GetEnvironmentVariable("AMQP_IGNORE_SSL_ERROR");
 
 
@@ -82,17 +82,17 @@ namespace ks.fiks.io.politiskbehandling.sample
                 scheme: appSettings.FiksIOConfig.ApiScheme,
                 host: appSettings.FiksIOConfig.ApiHost,
                 port: appSettings.FiksIOConfig.ApiPort);
-            
+
             var sslOption1 = (!string.IsNullOrEmpty(ignoreSSLError) && ignoreSSLError == "true")
                 ? new SslOption()
                 {
                     Enabled = true,
                     ServerName = appSettings.FiksIOConfig.AmqpHost,
                     CertificateValidationCallback =
-                        (RemoteCertificateValidationCallback) ((sender, certificate, chain, errors) => true)
+                        (RemoteCertificateValidationCallback)((sender, certificate, chain, errors) => true)
                 }
                 : null;
-                
+
 
             // Optional: Use custom amqp host (i.e. for connection to test queue)
             var amqp = new AmqpConfiguration(
@@ -114,29 +114,25 @@ namespace ks.fiks.io.politiskbehandling.sample
             {
                 Console.WriteLine("Melding " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType + " mottas...");
 
-                    List<List<string>> errorMessages = new List<List<string>>() { new List<string>(), new List<string>() };
+                string payload = File.ReadAllText("sampleResultatUtvalg.json");
 
-                    if (errorMessages[0].Count == 0)
-                    {
-                        string payload = File.ReadAllText("sampleResultatUtvalg.json");
+                var errorMessages = ValidateJsonFile(payload, Path.Combine("schema", "no.ks.fiks.politisk.behandling.resultatutvalg.v1.schema.json"));
 
-                        errorMessages = ValidateJsonFile(payload, Path.Combine("schema", "no.ks.fiks.politisk.behandling.resultatutvalg.v1.schema.json"));
+                if (errorMessages[0].Count == 0)
+                {
+                    var svarmsg = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.tjener.resultatutvalg.v1", payload, "resultat.json").Result;
+                    Console.WriteLine("Svarmelding " + svarmsg.MeldingId + " " + svarmsg.MeldingType + " sendt...");
+                    Console.WriteLine(payload);
+                    mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
+                }
+                else
+                {
+                    Console.WriteLine("Feil i validering av utvalg");
+                    mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1", String.Join("\n ", errorMessages[0]), "feil.txt");
+                    Console.WriteLine(String.Join("\n ", errorMessages[0]));
+                    mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
+                }
 
-                        if (errorMessages[0].Count == 0)
-                        {
-                            var svarmsg = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.tjener.resultatutvalg.v1", payload, "resultat.json").Result;
-                            Console.WriteLine("Svarmelding " + svarmsg.MeldingId + " " + svarmsg.MeldingType + " sendt...");
-                            Console.WriteLine(payload);
-                            mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
-                        }
-                        else
-                        {
-                            Console.WriteLine("Feil i validering av utvalg");
-                            mottatt.SvarSender.Svar("no.ks.fiks.kvittering.ugyldigforespørsel.v1", String.Join("\n ", errorMessages[0]), "feil.txt");
-                            Console.WriteLine(String.Join("\n ", errorMessages[0]));
-                            mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
-                        }
-                    }
             }
             else if (mottatt.Melding.MeldingType == "no.ks.fiks.politisk.behandling.klient.hentmøteplan.v1")
             {
@@ -206,7 +202,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                 Console.WriteLine("Melding " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType + " mottas...");
 
                 if (mottatt.Melding.HasPayload)
-                { 
+                {
                     List<List<string>> errorMessages = new List<List<string>>() { new List<string>(), new List<string>() };
                     IAsicReader reader = new AsiceReader();
                     using (var inputStream = mottatt.Melding.DecryptedStream.Result)
@@ -228,9 +224,9 @@ namespace ks.fiks.io.politiskbehandling.sample
 
                     if (errorMessages[0].Count == 0)
                     {
-                            var svarmsg2 = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.mottatt.v1").Result;
-                            Console.WriteLine("Svarmelding " + svarmsg2.MeldingId + " " + svarmsg2.MeldingType + " sendt...");
-                            mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
+                        var svarmsg2 = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.mottatt.v1").Result;
+                        Console.WriteLine("Svarmelding " + svarmsg2.MeldingId + " " + svarmsg2.MeldingType + " sendt...");
+                        mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
                     }
                     else
                     {
@@ -307,7 +303,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                 Console.WriteLine("Svarmelding " + svarmsg.MeldingId + " " + svarmsg.MeldingType + " sendt...");
 
 
-                    mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
+                mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
             }
             else if (mottatt.Melding.MeldingType == "no.ks.fiks.politisk.behandling.mottatt.v1")
             {
@@ -317,7 +313,7 @@ namespace ks.fiks.io.politiskbehandling.sample
 
                 Console.WriteLine("Melding er håndtert i ePlansak ok ......");
 
-                    mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
+                mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
 
             }
             else
@@ -362,7 +358,7 @@ namespace ks.fiks.io.politiskbehandling.sample
             {
                 return new X509Certificate2(File.ReadAllBytes(appSettings.FiksIOConfig.MaskinPortenCompanyCertificatePath), appSettings.FiksIOConfig.MaskinPortenCompanyCertificatePassword);
             }
-           
+
             var store = new X509Store(StoreLocation.CurrentUser);
 
             store.Open(OpenFlags.ReadOnly);
