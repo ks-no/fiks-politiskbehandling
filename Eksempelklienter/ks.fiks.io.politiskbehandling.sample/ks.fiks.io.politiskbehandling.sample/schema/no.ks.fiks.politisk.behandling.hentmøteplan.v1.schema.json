@@ -2,7 +2,6 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://no.ks.fiks.politisk.behandling/HentMøteplan.v1.schema.json",
   "title": "HentMøteplan",
-  "definitions": {
   "type": "object",
   "properties": {
     "utvalgId": {

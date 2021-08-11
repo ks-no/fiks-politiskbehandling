@@ -2,33 +2,63 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://no.ks.fiks.politisk.behandling/SendOrienteringssak.v1.schema.json",
   "title": "SendOrienteringssak",
-  "definitions": {
-    "Behandlingsplan": {
-      "type": "object",
-      "properties": {
-        "tilUtvalgId": {
-          "type": "string"
+    "definitions": {
+        "Vedlegg": {
+            "type": "object",
+            "properties": {
+                "tittel": {
+                    "type": "string"
+                },
+                "skjermetDokument": {
+                    "type": "boolean"
+                },
+                "dokumenttype": {
+                    "type": "object",
+                    "properties": {
+                        "kodeverdi": {
+                            "type": "string"
+                        },
+                        "kodebeskrivelse": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "referanseDokumentfil": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "tittel",
+                "skjermetDokument",
+                "referanseDokumentfil"
+            ]
         },
-        "tilUtvalgNavn": {
-          "type": "string"
-        },
-        "tilMøteId": {
-          "type": "string"
-        },
-        "tilMøtedato": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "rekkefølge": {
-          "type": "integer"
+        "Behandlingsplan": {
+            "type": "object",
+            "properties": {
+                "tilUtvalgId": {
+                    "type": "string"
+                },
+                "tilUtvalgNavn": {
+                    "type": "string"
+                },
+                "tilMøteId": {
+                    "type": "string"
+                },
+                "tilMøtedato": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "rekkefølge": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "tilUtvalgId",
+                "tilUtvalgNavn"
+            ]
         }
-      },
-      "required": [
-        "tilUtvalgId",
-        "tilUtvalgNavn"
-      ]
-    }
-  },
+    },
   "type": "object",
   "properties": {
     "sak": {

@@ -11,12 +11,6 @@
         },
         "utvalgNavn": {
           "type": "string"
-        },
-        "møte": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Møte"
-          }
         }
       },
       "required": [
