@@ -223,7 +223,7 @@ namespace ks.fiks.io.politiskbehandling.sample
 
                     if (errorMessages[0].Count == 0)
                     {
-                        var svarmsg2 = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.mottatt.v1").Result;
+                        var svarmsg2 = mottatt.SvarSender.Svar(PolitiskBehandlingMeldingTypeV1.Mottatt).Result;
                         Console.WriteLine("Svarmelding " + svarmsg2.MeldingId + " " + svarmsg2.MeldingType + " sendt...");
                         mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
                     }
@@ -270,7 +270,7 @@ namespace ks.fiks.io.politiskbehandling.sample
 
                     if (errorMessages[0].Count == 0)
                     {
-                        var svarmsg2 = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.mottatt.v1").Result;
+                        var svarmsg2 = mottatt.SvarSender.Svar(PolitiskBehandlingMeldingTypeV1.Mottatt).Result;
                         Console.WriteLine("Svarmelding " + svarmsg2.MeldingId + " " + svarmsg2.MeldingType + " sendt...");
                         mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
                     }
@@ -294,11 +294,11 @@ namespace ks.fiks.io.politiskbehandling.sample
                 Console.WriteLine("Melding " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType + " mottas...");
 
                 //TODO håndtere meldingen med ønsket funksjonalitet
-                var svarmsg = mottatt.SvarSender.Svar("no.ks.fiks.politisk.behandling.mottatt.v1").Result;
+                var svarmsg = mottatt.SvarSender.Svar(PolitiskBehandlingMeldingTypeV1.Mottatt).Result;
                 Console.WriteLine("Svarmelding " + svarmsg.MeldingId + " " + svarmsg.MeldingType + " sendt...");
                 mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
             }
-            else if (mottatt.Melding.MeldingType == "no.ks.fiks.politisk.behandling.mottatt.v1")
+            else if (mottatt.Melding.MeldingType == PolitiskBehandlingMeldingTypeV1.Mottatt)
             {
                 Console.WriteLine("Melding " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType + " mottas...");
                 //TODO håndtere meldingen med ønsket funksjonalitet
