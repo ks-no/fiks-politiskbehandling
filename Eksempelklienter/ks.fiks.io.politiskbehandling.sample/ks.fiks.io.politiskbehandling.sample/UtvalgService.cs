@@ -108,6 +108,8 @@ namespace ks.fiks.io.politiskbehandling.sample
         static void OnReceivedMelding(object sender, MottattMeldingArgs mottatt)
         {
             //Se oversikt over meldingstyper på https://github.com/ks-no/fiks-io-meldingstype-katalog/tree/test/schema
+            
+            Console.WriteLine($"Melding med type {mottatt.Melding.MeldingType} skal prosesseres...");
 
             // Process the message
             if (mottatt.Melding.MeldingType == PolitiskBehandlingMeldingTypeV1.HentUtvalg)
@@ -307,7 +309,7 @@ namespace ks.fiks.io.politiskbehandling.sample
             }
             else
             {
-                Console.WriteLine("Ubehandlet melding i køen " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType);
+                Console.WriteLine("OBS! Ubehandlet melding i køen " + mottatt.Melding.MeldingId + " " + mottatt.Melding.MeldingType);
                 //mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
             }
         }
