@@ -54,7 +54,7 @@ pipeline {
         stage('Push helm chart') {
             steps {
                 println("Building helm chart version: ${env.FULL_VERSION}")
-                buildHelm3Chart(PROJECT_CHARTNAME, env.FULL_VERSION)
+                buildHelmChart(PROJECT_CHARTNAME, env.FULL_VERSION)
             }
         }
         
