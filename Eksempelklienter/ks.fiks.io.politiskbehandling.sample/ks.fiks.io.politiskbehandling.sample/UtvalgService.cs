@@ -136,7 +136,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                 }
 
             }
-            else if (mottatt.Melding.MeldingType == PolitiskBehandlingMeldingTypeV1.HentMøteplan)
+            else if (mottatt.Melding.MeldingType == PolitiskBehandlingMeldingTypeV1.HentMoeteplan)
             {
                 Console.WriteLine($"Melding med meldingid {mottatt.Melding.MeldingId} og type {mottatt.Melding.MeldingType} mottas...");
 
@@ -169,7 +169,7 @@ namespace ks.fiks.io.politiskbehandling.sample
 
                         if (errorMessages[0].Count == 0)
                         {
-                            var svarmsg = mottatt.SvarSender.Svar(PolitiskBehandlingMeldingTypeV1.ResultatMøteplan, payload, "resultat.json").Result;
+                            var svarmsg = mottatt.SvarSender.Svar(PolitiskBehandlingMeldingTypeV1.ResultatMoeteplan, payload, "resultat.json").Result;
                             Console.WriteLine($"Svarmelding på meldingid {svarmsg.MeldingId} for type {svarmsg.MeldingType} sendt...");
                             Console.WriteLine(payload);
                             mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
