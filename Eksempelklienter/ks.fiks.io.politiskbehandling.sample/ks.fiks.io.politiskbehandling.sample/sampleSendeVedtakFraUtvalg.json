@@ -1,26 +1,26 @@
 {
   "utvalgId": "345345345345",
   "utvalgNavn": "Kommunestyre",
-  "møteId": "3",
-  "møtedato": "2021-05-20",
+  "moeteId": "3",
+  "moetedato": "2021-05-20",
   "erEndeligVedtak": true,
   "sak": {
-    "referanseEksternNøkkel": {
+    "referanseEksternNoekkel": {
       "fagsystem": "Politisk behandling",
-      "nøkkel": "PB123456789"
+      "noekkel": "PB123456789"
     },
     "fagsystemetsSaksnummer": {
-      "saksår": 2021,
+      "saksaar": 2021,
       "sakssekvensnummer": 2
     },
     "utvalgetsSaksnummer": {
-      "saksår": 2021,
+      "saksaar": 2021,
       "sakssekvensnummer": 34
     },
-    "tittel": "OMRÅDEREGULERING FOR HIS Allè - Endelig vedtak",
+    "tittel": "OMRÃ…DEREGULERING FOR HIS AlleÂ´ - Endelig vedtak",
     "vedtaksdato": "2021-05-20",
     "hoveddokument": {
-      "tittel": "OMRÅDEREGULERING FOR HIS Allè - Endelig vedtak",
+      "tittel": "OMRÃ…DEREGULERING FOR HIS AllÃ‰ - Endelig vedtak",
       "skjermetDokument": false,
       "dokumenttype": {
         "kodeverdi": "VEDTAK"
@@ -29,7 +29,7 @@
       "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     },
     "vedtak": {
-      "tekstInnhold": "Områderegulering for His Allè med tilhørende reguleringsbestemmelser vedtas. ....",
+      "tekstInnhold": "OmrÃ¥deregulering for His AlleÂ´ med tilhÃ¸rende reguleringsbestemmelser vedtas. ....",
       "tekstFormat": {
         "kodeverdi": "markup"
       }

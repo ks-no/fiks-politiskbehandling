@@ -4,12 +4,12 @@
     "tilUtvalgNavn": "Plan og byggesak"
   },
   "sak": {
-    "referanseEksternNøkkel": {
+    "referanseEksternNoekkel": {
       "fagsystem": "ePlansak",
-      "nøkkel": "AB123456789"
+      "noekkel": "AB123456789"
     },
     "fagsystemetsSaksnummer": {
-      "saksår": 2021,
+      "saksaar": 2021,
       "sakssekvensnummer": 1
     },
     "tittel": "OMRÅDEREGULERING FOR HIS Allè - BEHANDLING FØR HØRING OG UTLEGGING TIL OFFENTLIG ETTERSYN",
