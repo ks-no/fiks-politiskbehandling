@@ -118,7 +118,7 @@ namespace ks.fiks.io.politiskbehandling.sample
 
                 var payload = File.ReadAllText("sampleResultatUtvalg.json");
 
-                var errorMessages = ValidateJsonFile(payload, Path.Combine("Schema", "no.ks.fiks.politisk.behandling.resultatutvalg.v1.schema.json"));
+                var errorMessages = ValidateJsonFile(payload, Path.Combine("Schema", $"{PolitiskBehandlingMeldingTypeV1.ResultatUtvalg}.schema.json"));
 
                 if (errorMessages[0].Count == 0)
                 {
@@ -153,7 +153,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                             {
                                 if (asiceReadEntry.FileName.Contains(".json"))
                                 {
-                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("Schema", "no.ks.fiks.politisk.behandling.hentmoteplan.v1.schema.json"));
+                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("Schema", $"{PolitiskBehandlingMeldingTypeV1.HentMoeteplan}.schema.json"));
                                 }
                                 else
                                     Console.WriteLine($"Mottatt vedlegg: {asiceReadEntry.FileName}");
@@ -165,7 +165,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                     {
                         var payload = File.ReadAllText("sampleResultat.json");
 
-                        errorMessages = ValidateJsonFile(payload, Path.Combine("Schema", "no.ks.fiks.politisk.behandling.resultatmoteplan.v1.schema.json"));
+                        errorMessages = ValidateJsonFile(payload, Path.Combine("Schema", $"{PolitiskBehandlingMeldingTypeV1.ResultatMoeteplan}.schema.json"));
 
                         if (errorMessages[0].Count == 0)
                         {
@@ -215,7 +215,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                             {
                                 if (asiceReadEntry.FileName.Contains(".json"))
                                 {
-                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("Schema", "no.ks.fiks.politisk.behandling.sendutvalgssak.v1.schema.json"));
+                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("Schema", $"{PolitiskBehandlingMeldingTypeV1.SendUtvalgssak}.schema.json"));
                                 }
                                 else
                                     Console.WriteLine($"Mottatt vedlegg: {asiceReadEntry.FileName}");
@@ -262,7 +262,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                             {
                                 if (asiceReadEntry.FileName.Contains(".json"))
                                 {
-                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("Schema", "no.ks.fiks.politisk.behandling.sendorienteringssak.v1.schema.json"));
+                                    errorMessages = ValidateJsonFile(new StreamReader(entryStream).ReadToEnd(), Path.Combine("Schema", $"{PolitiskBehandlingMeldingTypeV1.SendOrienteringssak}.schema.json"));
                                 }
                                 else
                                     Console.WriteLine("Mottatt vedlegg: " + asiceReadEntry.FileName);
