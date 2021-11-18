@@ -1,9 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Serilog;
 using Serilog.Events;
 
@@ -40,24 +43,26 @@ namespace ks.fiks.io.politiskbehandling.sample
             Log.Information("LOGSTASH_DESTINATION: {LogstashDestination}", logstashDestination);
             Log.Information("Path.PathSeparator: {PathSeparator}", Path.PathSeparator);
             
-            await new HostBuilder()
-                .ConfigureHostConfiguration((configHost) =>
-                {
-                    configHost.AddEnvironmentVariables("DOTNET_");
-                })
+            await WebHost.CreateDefaultBuilder(args)
+                .UseKestrel(c => c.AddServerHeader = false)
                 .ConfigureAppConfiguration((hostBuilder, config) =>
                 {
+                    config.AddEnvironmentVariables("DOTNET_");
                     config.SetBasePath(Directory.GetCurrentDirectory());
                     config.AddJsonFile("appsettings.json", optional: true);
-                    config.AddJsonFile($"appsettings.{hostBuilder.HostingEnvironment.EnvironmentName}.json", optional: true);
+                    config.AddJsonFile($"appsettings.{aspnetcoreEnvironment}.json", optional: true);
                     config.AddEnvironmentVariables("fiksPolitiskBehandlingMock_");
+                    
                 })
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddSingleton(AppSettingsBuilder.CreateAppSettings(hostContext.Configuration));
                     services.AddHostedService<UtvalgService>();
-                }).UseSerilog()
-                .RunConsoleAsync();
+                    services.AddHealthChecks();
+                })
+                .UseStartup<Startup>()
+                .UseSerilog()
+                .Build().RunAsync();
         }
     }
 }
