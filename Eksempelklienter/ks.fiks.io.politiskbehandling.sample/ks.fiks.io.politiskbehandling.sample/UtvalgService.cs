@@ -10,7 +10,6 @@ using KS.Fiks.ASiC_E;
 using KS.Fiks.IO.Client;
 using KS.Fiks.IO.Client.Configuration;
 using KS.Fiks.IO.Client.Models;
-using KS.Fiks.IO.Client.Models.Feilmelding;
 using KS.Fiks.IO.Politiskbehandling.Client.Models;
 using Ks.Fiks.Maskinporten.Client;
 using Microsoft.Extensions.Hosting;
@@ -158,7 +157,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                 else
                 {
                     Log.Error("Feil i validering av sendorienteringssak");
-                    mottatt.SvarSender.Svar(FeilmeldingMeldingTypeV1.Ugyldigforespørsel, string.Join("\n ", errorMessages[0]),
+                    mottatt.SvarSender.Svar("", string.Join("\n ", errorMessages[0]),
                         "feil.txt");
                     Log.Error(string.Join("\n ", errorMessages[0]));
                     mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
@@ -167,7 +166,7 @@ namespace ks.fiks.io.politiskbehandling.sample
             else
             {
                 var svarmsg = mottatt.SvarSender
-                    .Svar(FeilmeldingMeldingTypeV1.Ugyldigforespørsel, "Meldingen mangler innhold", "feil.txt").Result;
+                    .Svar(PolitiskBehandlingMeldingTypeV1.Ugyldigforespørsel, "Meldingen mangler innhold", "feil.txt").Result;
                 Log.Error("Svarmelding på {MeldingID} med svar {MeldingID} type {MeldingType}, mottatt melding mangler innhold", mottatt.Melding.MeldingId, svarmsg.MeldingId, svarmsg.MeldingType);
                 mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
             }
@@ -191,7 +190,7 @@ namespace ks.fiks.io.politiskbehandling.sample
             else
             {
                 Log.Error("Feil i validering av utvalg");
-                mottatt.SvarSender.Svar(FeilmeldingMeldingTypeV1.Ugyldigforespørsel, string.Join("\n ", errorMessages[0]),
+                mottatt.SvarSender.Svar(PolitiskBehandlingMeldingTypeV1.Ugyldigforespørsel, string.Join("\n ", errorMessages[0]),
                     "feil.txt");
                 Log.Error("Feilmeldinger:" + string.Join("\n ", errorMessages[0]));
                 mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
@@ -213,7 +212,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                 else
                 {
                     Log.Error("Feil i validering av sendutvalgsak");
-                    mottatt.SvarSender.Svar(FeilmeldingMeldingTypeV1.Ugyldigforespørsel, string.Join("\n ", errorMessages[0]),
+                    mottatt.SvarSender.Svar(PolitiskBehandlingMeldingTypeV1.Ugyldigforespørsel, string.Join("\n ", errorMessages[0]),
                         "feil.txt");
                     Log.Error("Feilmelding: " + string.Join("\n ", errorMessages[0]));
                     mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
@@ -222,7 +221,7 @@ namespace ks.fiks.io.politiskbehandling.sample
             else
             {
                 var svarmsg = mottatt.SvarSender
-                    .Svar(FeilmeldingMeldingTypeV1.Ugyldigforespørsel, "Meldingen mangler innhold", "feil.txt").Result;
+                    .Svar(PolitiskBehandlingMeldingTypeV1.Ugyldigforespørsel, "Meldingen mangler innhold", "feil.txt").Result;
                 Log.Error("Svarmelding på mottatt melding {MeldingID} med svar {MeldingID} type {MeldingType}, mottatt melding mangler innhold", mottatt.Melding.MeldingId, svarmsg.MeldingId, svarmsg.MeldingType);
                 mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
             }
@@ -253,7 +252,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                     else
                     {
                         Log.Error("Feil i validering av resultatmøteplan");
-                        mottatt.SvarSender.Svar(FeilmeldingMeldingTypeV1.Ugyldigforespørsel,
+                        mottatt.SvarSender.Svar(PolitiskBehandlingMeldingTypeV1.Ugyldigforespørsel,
                             string.Join("\n ", errorMessages[0]), "feil.txt");
                         Log.Error("Feilmelding: " + string.Join("\n ", errorMessages[0]));
                         mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
@@ -262,7 +261,7 @@ namespace ks.fiks.io.politiskbehandling.sample
                 else
                 {
                     Log.Error("Feil i validering av hentmøteplan");
-                    mottatt.SvarSender.Svar(FeilmeldingMeldingTypeV1.Ugyldigforespørsel, string.Join("\n ", errorMessages[0]),
+                    mottatt.SvarSender.Svar(PolitiskBehandlingMeldingTypeV1.Ugyldigforespørsel, string.Join("\n ", errorMessages[0]),
                         "feil.txt");
                     Log.Error("Feilmelding: " + string.Join("\n ", errorMessages[0]));
                     mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
@@ -271,7 +270,7 @@ namespace ks.fiks.io.politiskbehandling.sample
             else
             {
                 var svarmsg = mottatt.SvarSender
-                    .Svar(FeilmeldingMeldingTypeV1.Ugyldigforespørsel, "Meldingen mangler innhold", "feil.txt").Result;
+                    .Svar(PolitiskBehandlingMeldingTypeV1.Ugyldigforespørsel, "Meldingen mangler innhold", "feil.txt").Result;
                 Log.Error("Svarmelding på {MeldingID} med svar {MeldingID} type {MeldingType}, meldingen mangler innhold", mottatt.Melding.MeldingId, svarmsg.MeldingId, svarmsg.MeldingType);
 
                 mottatt.SvarSender.Ack(); // Ack message to remove it from the queue
