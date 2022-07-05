@@ -62,9 +62,10 @@ namespace ks.fiks.io.politiskbehandling.sample
 
             // Optional: Use custom amqp host (i.e. for connection to test queue)
             var amqp = new AmqpConfiguration(
-                host: appSettings.FiksIOConfig.AmqpHost, //"io.fiks.test.ks.no",
+                host: appSettings.FiksIOConfig.AmqpHost,
                 port: appSettings.FiksIOConfig.AmqpPort,
-                sslOption1);
+                sslOption1, 
+                "Politisk-Behandling-Simulator");
 
             // Combine all configurations
             var configuration = new FiksIOConfiguration(account, integration, maskinporten, api, amqp);
