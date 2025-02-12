@@ -1,3 +1,0 @@
-image:
-  repository: ksjenkins
-  tag: ${CHART_VERSION}
